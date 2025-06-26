@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Users, Target, Trophy, Heart, MapPin, Phone, Mail, Calendar, Play } from 'lucide-react';
+import { ChevronDown, Users, Target, Trophy, Heart, MapPin, Phone, Mail, Calendar, Play, Facebook, Twitter, Instagram, Linkedin, GraduationCap, Menu } from 'lucide-react';
 
 function App() {
   const [scrollY, setScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -22,9 +23,7 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrollY > 50 ? 'bg-red-600/95 backdrop-blur-sm shadow-xl' : 'bg-black/30 backdrop-blur-sm'
-      }`}>
+      <nav className="sticky top-0 w-full z-50 bg-black/40 backdrop-blur-sm transition-all duration-300">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
@@ -39,20 +38,54 @@ function App() {
               </div>
             </div>
             
-            <div className="hidden md:flex space-x-8">
-              {['Home', 'About', 'Teams', 'Contact'].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase())}
-                  className="text-white hover:text-red-200 transition-colors font-medium hover:scale-105 transform duration-200"
-                >
-                  {item}
-                </button>
-              ))}
+            {/* Desktop Nav */}
+            <div className="hidden md:flex">
+              <div className="flex space-x-4 bg-black/60 px-4 py-2 rounded-full shadow-lg backdrop-blur-md">
+                {['Home', 'About', 'Teams', 'Contact'].map((item) => (
+                  <button
+                    key={item}
+                    onClick={() => scrollToSection(item.toLowerCase())}
+                    className="text-white hover:text-red-200 transition-colors font-medium hover:scale-105 transform duration-200 px-4 py-2 rounded-full"
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Mobile Hamburger */}
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={() => setMobileNavOpen(!mobileNavOpen)}
+                className="text-white p-2 rounded-full hover:bg-black/30 focus:outline-none focus:ring-2 focus:ring-red-500"
+                aria-label="Open navigation menu"
+              >
+                <Menu className="w-8 h-8" />
+              </button>
             </div>
           </div>
         </div>
       </nav>
+
+      {/* Mobile Nav Dropdown */}
+      {mobileNavOpen && (
+        <div className="md:hidden flex flex-col items-end mt-2">
+          <div className="flex flex-col space-y-2 bg-black/90 px-6 py-4 rounded-2xl shadow-xl w-full animate-fade-in">
+            {['Home', 'About', 'Teams', 'Contact'].map((item) => (
+              <button
+                key={item}
+                onClick={() => {
+                  scrollToSection(item.toLowerCase());
+                  setMobileNavOpen(false);
+                }}
+                className="text-white text-lg font-semibold py-2 px-4 rounded-full hover:bg-red-600 transition-colors text-left w-full"
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Hero Section with Sunday.jpg background */}
       <section 
@@ -80,11 +113,6 @@ function App() {
 
         <div className="relative z-10 text-center text-white max-w-5xl mx-auto px-4">
           <div className="mb-8 animate-fade-in">
-            <img 
-              src="/cu-logo.png" 
-              alt="Camden United Logo" 
-              className="w-28 h-28 mx-auto mb-8 object-contain bg-transparent transform hover:scale-110 transition-transform duration-500"
-            />
             <h1 className="text-7xl md:text-9xl font-black mb-6 tracking-tight drop-shadow-2xl">
               <span className="block transform hover:scale-105 transition-transform duration-500">CAMDEN</span>
               <span className="block transform hover:scale-105 transition-transform duration-500 delay-200">UNITED</span>
@@ -127,7 +155,10 @@ function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 bg-gray-50">
+      <section 
+        id="about" 
+        className="py-24 bg-white"
+      >
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Who We Are</h2>
@@ -225,27 +256,27 @@ function App() {
                 title: "Youth Development",
                 age: "Ages 8-16",
                 description: "Building fundamental skills and fostering a love for the game",
-                icon: "🌟",
+                icon: <GraduationCap className="w-12 h-12 mb-4 mx-auto" />,
                 color: "from-blue-500 to-blue-600"
               },
               {
                 title: "Senior Teams",
                 age: "Ages 17+",
                 description: "Competitive football in local leagues with professional coaching",
-                icon: "⚽",
+                icon: <Users className="w-12 h-12 mb-4 mx-auto" />,
                 color: "from-red-500 to-red-600"
               },
               {
                 title: "Community League",
                 age: "All Ages",
                 description: "Casual and competitive options for community members",
-                icon: "🏆",
+                icon: <Trophy className="w-12 h-12 mb-4 mx-auto" />,
                 color: "from-green-500 to-green-600"
               }
             ].map((team, index) => (
               <div key={index} className="group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 bg-white/95 backdrop-blur-sm">
                 <div className={`bg-gradient-to-br ${team.color} p-8 text-white h-full`}>
-                  <div className="text-5xl mb-4">{team.icon}</div>
+                  <div className="flex justify-center">{team.icon}</div>
                   <h3 className="text-2xl font-bold mb-2">{team.title}</h3>
                   <p className="text-lg opacity-90 mb-4">{team.age}</p>
                   <p className="opacity-85 leading-relaxed">{team.description}</p>
@@ -278,15 +309,7 @@ function App() {
       {/* Contact Section */}
       <section id="contact" className="py-24 bg-gray-900 text-white relative overflow-hidden">
         {/* Subtle background pattern */}
-        <div 
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: 'url(/cu-logo.png)',
-            backgroundSize: '200px',
-            backgroundRepeat: 'repeat',
-            backgroundPosition: 'center'
-          }}
-        ></div>
+        {/* Removed logo background for a clean look */}
         
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <div className="text-center mb-20">
@@ -338,15 +361,7 @@ function App() {
       {/* Footer */}
       <footer className="bg-black text-white py-16 relative overflow-hidden">
         {/* Background pattern */}
-        <div 
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: 'url(/cu-logo.png)',
-            backgroundSize: '150px',
-            backgroundRepeat: 'repeat',
-            backgroundPosition: 'center'
-          }}
-        ></div>
+        {/* Removed logo background for a clean look */}
         
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
@@ -355,7 +370,7 @@ function App() {
                 <img 
                   src="/cu-logo.png" 
                   alt="Camden United Logo" 
-                  className="w-16 h-16 rounded-full shadow-lg"
+                  className="w-28 h-28 object-contain bg-transparent"
                 />
                 <div>
                   <h3 className="text-2xl font-bold">Camden United FC</h3>
@@ -366,11 +381,18 @@ function App() {
                 A community-driven movement dedicated to transforming lives through football, education, and opportunity.
               </p>
               <div className="flex space-x-4">
-                {['Facebook', 'Twitter', 'Instagram'].map((social) => (
-                  <div key={social} className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer">
-                    <span className="text-sm font-bold">{social[0]}</span>
-                  </div>
-                ))}
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer">
+                  <Facebook className="w-6 h-6 text-white" />
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer">
+                  <Twitter className="w-6 h-6 text-white" />
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer">
+                  <Instagram className="w-6 h-6 text-white" />
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors cursor-pointer">
+                  <Linkedin className="w-6 h-6 text-white" />
+                </a>
               </div>
             </div>
             
