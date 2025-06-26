@@ -331,7 +331,7 @@ function App() {
               {
                 icon: Phone,
                 title: "Call Us",
-                info: "+44 (0) 20 XXXX XXXX",
+                info: "+44 (0) 7837 241114",
                 details: "Monday - Friday, 9AM - 6PM"
               },
               {
