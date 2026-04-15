@@ -5,11 +5,63 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Instagram, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
+const INSTAGRAM_URL = 'https://www.instagram.com/camdenunitedfc/';
+
 const instaPosts = [
-  { id: 1, type: 'video', src: '/reel.mp4', poster: '/capture.png', alt: 'Islington Cup Champions', caption: '🏆 CAMPIONE! 🏆 #Champions', likes: 493 },
-  { id: 2, type: 'image', src: '/first.jpeg', alt: 'Matchday action', caption: 'Big win last weekend! 💪 #CamdenUnited', likes: 124 },
-  { id: 3, type: 'image', src: '/abdul.PNG', alt: 'Neighbourhood Hero', caption: 'Neighbourhood Hero 👑 Rest in Power Abdulaziz Munye. 🌹 #CamdenUnited', likes: 3148 },
+  {
+    id: 1,
+    src: '/Capture.PNG',
+    alt: 'Islington Cup Champions',
+    caption: '🏆 CAMPIONE! 🏆 #Champions',
+    likes: 493,
+    href: INSTAGRAM_URL,
+  },
+  { id: 2, src: '/first.jpeg', alt: 'Matchday action', caption: 'Big win last weekend! 💪 #CamdenUnited', likes: 124 },
+  { id: 3, src: '/abdul.PNG', alt: 'Neighbourhood Hero', caption: 'Neighbourhood Hero 👑 Rest in Power Abdulaziz Munye. 🌹 #CamdenUnited', likes: 3148 },
 ];
+
+function InstaCarouselSlide({ post }) {
+  const imageInner = (
+    <div className="relative w-full h-full bg-black">
+      <Image
+        src={post.src}
+        alt={post.alt}
+        fill
+        className={`object-contain${post.href ? ' transition-opacity group-hover:opacity-90' : ''}`}
+        draggable={false}
+        sizes="(max-width: 1200px) 100vw, 80vw"
+      />
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 md:p-8 flex justify-between items-end">
+        <p className="text-white text-sm md:text-lg font-medium line-clamp-2 max-w-[80%]">{post.caption}</p>
+        <div className="flex items-center gap-2 text-primary font-bold uppercase tracking-wider">
+          <span className="text-white">♥</span> {post.likes}
+        </div>
+      </div>
+      {post.href ? (
+        <div className="pointer-events-none absolute right-4 top-4 flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 font-oswald text-sm uppercase tracking-wider text-white backdrop-blur-sm">
+          <Instagram className="h-4 w-4" />
+          <span>Open on Instagram</span>
+        </div>
+      ) : null}
+    </div>
+  );
+
+  if (post.href) {
+    return (
+      <a
+        href={post.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group relative block h-full w-full outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      >
+        {imageInner}
+        <span className="sr-only">Open Camden United FC on Instagram</span>
+      </a>
+    );
+  }
+
+  return imageInner;
+}
 
 export default function Media() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -57,7 +109,7 @@ export default function Media() {
           </div>
           
           <a 
-            href="https://instagram.com/camdenunitedfc" 
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-3 text-gray-900 font-oswald uppercase tracking-widest hover:text-primary transition-colors text-lg"
@@ -82,7 +134,7 @@ export default function Media() {
                 x: { type: "spring", stiffness: 300, damping: 30 },
                 opacity: { duration: 0.2 }
               }}
-              drag="x"
+              drag={currentPost.href ? false : 'x'}
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={1}
               onDragEnd={(e, { offset, velocity }) => {
@@ -96,35 +148,7 @@ export default function Media() {
               }}
               className="absolute inset-0 w-full h-full flex items-center justify-center"
             >
-                {currentPost.type === 'video' ? (
-                     <video 
-                        src={currentPost.src} 
-                        className="w-full h-full object-contain bg-black"
-                        controls
-                        playsInline
-                        poster={currentPost.poster}
-                    >
-                        Your browser does not support the video tag.
-                    </video>
-                ) : (
-                    <div className="relative w-full h-full bg-black">
-                         <Image 
-                            src={currentPost.src} 
-                            alt={currentPost.alt} 
-                            fill 
-                            className="object-contain" // maintain aspect ratio within 16:9
-                            draggable={false}
-                            sizes="(max-width: 1200px) 100vw, 80vw"
-                        />
-                        {/* Overlay with Caption for images */}
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 md:p-8 flex justify-between items-end">
-                             <p className="text-white text-sm md:text-lg font-medium line-clamp-2 max-w-[80%]">{currentPost.caption}</p>
-                             <div className="flex items-center gap-2 text-primary font-bold uppercase tracking-wider">
-                                <span className="text-white">♥</span> {currentPost.likes}
-                            </div>
-                        </div>
-                    </div>
-                )}
+              <InstaCarouselSlide post={currentPost} />
             </motion.div>
           </AnimatePresence>
             
