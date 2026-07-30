@@ -9,6 +9,76 @@ import { sponsors } from '@/data/sponsors';
 const PARTNER_EMAIL = 'lida@camdenunitedfc.com';
 const CAMDEN_ALGORITHM_URL = 'https://rsvp.withgoogle.com/events/camdenalgorithm/home';
 
+const caseStudies = [
+  {
+    id: 'camden-algorithm',
+    image: '/camden-algorithm-content-1.png',
+    imageAlt:
+      'Camden United youth steering committee and partners outside Google HQ for The Camden Algorithm',
+    logo: '/google-logo.png',
+    logoAlt: 'Google',
+    logoClassName: 'object-contain h-14 sm:h-16 md:h-20 w-auto max-w-[16rem]',
+    meta: "September 2025 · Google HQ, King's Cross",
+    title: 'The Camden Algorithm',
+    link: {
+      href: CAMDEN_ALGORITHM_URL,
+      label: 'View event page',
+    },
+    paragraphs: [
+      'In partnership with Google, Young Camden Foundation and Camden Giving, Camden United helped deliver The Camden Algorithm — a youth-led AI and careers event at Google HQ for young people aged 16–25 living, working or studying in Camden.',
+      'Over six months, a Youth Steering Committee of 15 young people — including Camden United members — co-designed and delivered the full programme. The day brought together 200+ attendees for workshops on AI careers and personal branding, Google apprenticeship panels, hands-on sessions with tools like Gemini and NotebookLM, and networking with industry leaders and local civic partners.',
+      'The partnership showed what happens when a grassroots club and a global company invest in young people from Camden: real access, real skills, and a platform that proves football can open doors far beyond the pitch.',
+    ],
+    highlightPhrases: ['The Camden Algorithm', '200+ attendees'],
+    stats: [
+      { label: 'Attendees', value: '200+' },
+      { label: 'Youth steers', value: '15' },
+      { label: 'Months to deliver', value: '6' },
+    ],
+  },
+  {
+    id: 'mental-resilience',
+    image: '/mental-resiliance.jpeg',
+    imageAlt:
+      'Young men from Camden United in a circle discussion during a mental resilience workshop',
+    logo: null,
+    eyebrow: 'Wellbeing · Youth programme',
+    meta: '7 June 2026 · 16:15–17:00 · Peckwater Estate, NW5 2UD',
+    title: 'Mental Resilience Workshop',
+    paragraphs: [
+      'Camden United hosted a Mental Resilience Workshop for young men in our community, creating a safe space to talk openly about pressure, wellbeing, and building mental strength — using trusted relationships and football culture as the way in.',
+      'Guest speaker Jermaine Anderson (GMBPsS), a former professional footballer, shared lived experience and practical tools with members in a community setting at Peckwater Estate. Sessions like this sit at the heart of our mission: football first, then honest conversations that help young men seek support before reaching crisis point.',
+      'The workshop was delivered with support from GO! London and funded by the Mayor of London, in partnership with London Marathon Foundation, The National Lottery, and Sport England — showing how sport funding can unlock real mental health conversations for young people in Camden.',
+    ],
+    highlightPhrases: ['Jermaine Anderson (GMBPsS)', 'GO! London', 'Mayor of London'],
+    stats: [
+      { label: 'Guest speaker', value: 'Jermaine Anderson' },
+      { label: 'Focus', value: 'Mental resilience' },
+      { label: 'Funded by', value: 'Mayor of London' },
+    ],
+  },
+];
+
+function highlightText(text, phrases = []) {
+  if (!phrases.length) return text;
+
+  const escaped = phrases.map((phrase) =>
+    phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  );
+  const pattern = new RegExp(`(${escaped.join('|')})`, 'g');
+  const parts = text.split(pattern);
+
+  return parts.map((part, index) =>
+    phrases.includes(part) ? (
+      <strong key={index} className="text-gray-900 font-semibold">
+        {part}
+      </strong>
+    ) : (
+      <span key={index}>{part}</span>
+    )
+  );
+}
+
 const partnerBenefits = [
   'Direct visibility with an engaged, growing local community',
   'A genuine, story-led partnership — not just a logo placement',
@@ -178,89 +248,90 @@ export function CaseStudies() {
           <div className="w-20 h-2 bg-primary" />
         </motion.div>
 
-        <motion.article
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
-          className="space-y-10 md:space-y-14"
-        >
-          <div className="relative w-full aspect-[16/10] md:aspect-[21/9] overflow-hidden bg-gray-200">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/camden-algorithm-content-1.png"
-              alt="Camden United youth steering committee and partners outside Google HQ for The Camden Algorithm"
-              className="absolute inset-0 h-full w-full object-cover object-center"
-            />
-          </div>
+        <div className="space-y-20 md:space-y-28">
+          {caseStudies.map((study, index) => (
+            <motion.article
+              key={study.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: index * 0.05 }}
+              className="space-y-10 md:space-y-14"
+            >
+              {index > 0 ? <div className="border-t border-gray-200" /> : null}
 
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-            <div className="lg:col-span-4 space-y-6">
-              <div className="inline-flex items-center">
+              <div className="relative w-full aspect-[16/10] md:aspect-[21/9] overflow-hidden bg-gray-200">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/google-logo.png"
-                  alt="Google"
-                  width={240}
-                  height={80}
-                  className="object-contain h-14 sm:h-16 md:h-20 w-auto max-w-[16rem]"
+                  src={study.image}
+                  alt={study.imageAlt}
+                  className="absolute inset-0 h-full w-full object-cover object-center"
                 />
               </div>
-              <p className="text-primary font-oswald font-bold uppercase tracking-widest text-sm">
-                September 2025 · Google HQ, King&apos;s Cross
-              </p>
-              <h3 className="text-3xl md:text-4xl font-oswald font-black uppercase text-gray-900 leading-tight">
-                The Camden Algorithm
-              </h3>
-              <Link
-                href={CAMDEN_ALGORITHM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-gray-900 font-oswald uppercase tracking-widest text-sm border-b-2 border-primary pb-1 hover:text-primary transition-colors"
-              >
-                View event page
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </div>
 
-            <div className="lg:col-span-8 space-y-6 text-gray-600 leading-relaxed text-lg">
-              <p>
-                In partnership with Google, Young Camden Foundation and Camden Giving, Camden
-                United helped deliver <strong className="text-gray-900 font-semibold">The Camden Algorithm</strong> —
-                a youth-led AI and careers event at Google HQ for young people aged 16–25 living,
-                working or studying in Camden.
-              </p>
-              <p>
-                Over six months, a Youth Steering Committee of 15 young people — including
-                Camden United members — co-designed and delivered the full programme. The day
-                brought together <strong className="text-gray-900 font-semibold">200+ attendees</strong> for
-                workshops on AI careers and personal branding, Google apprenticeship panels,
-                hands-on sessions with tools like Gemini and NotebookLM, and networking with
-                industry leaders and local civic partners.
-              </p>
-              <p>
-                The partnership showed what happens when a grassroots club and a global company
-                invest in young people from Camden: real access, real skills, and a platform
-                that proves football can open doors far beyond the pitch.
-              </p>
+              <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+                <div className="lg:col-span-4 space-y-6">
+                  {study.logo ? (
+                    <div className="inline-flex items-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={study.logo}
+                        alt={study.logoAlt}
+                        width={240}
+                        height={80}
+                        className={study.logoClassName}
+                      />
+                    </div>
+                  ) : study.eyebrow ? (
+                    <p className="text-sm font-oswald font-bold uppercase tracking-widest text-gray-500">
+                      {study.eyebrow}
+                    </p>
+                  ) : null}
 
-              <dl className="grid sm:grid-cols-3 gap-6 pt-6 border-t border-gray-200">
-                {[
-                  { label: 'Attendees', value: '200+' },
-                  { label: 'Youth steers', value: '15' },
-                  { label: 'Months to deliver', value: '6' },
-                ].map((stat) => (
-                  <div key={stat.label}>
-                    <dt className="text-xs font-oswald uppercase tracking-widest text-gray-400 mb-1">
-                      {stat.label}
-                    </dt>
-                    <dd className="text-3xl font-oswald font-black text-gray-900">{stat.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </div>
-        </motion.article>
+                  <p className="text-primary font-oswald font-bold uppercase tracking-widest text-sm">
+                    {study.meta}
+                  </p>
+                  <h3 className="text-3xl md:text-4xl font-oswald font-black uppercase text-gray-900 leading-tight">
+                    {study.title}
+                  </h3>
+
+                  {study.link ? (
+                    <Link
+                      href={study.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-gray-900 font-oswald uppercase tracking-widest text-sm border-b-2 border-primary pb-1 hover:text-primary transition-colors"
+                    >
+                      {study.link.label}
+                      <ArrowUpRight className="h-4 w-4" />
+                    </Link>
+                  ) : null}
+                </div>
+
+                <div className="lg:col-span-8 space-y-6 text-gray-600 leading-relaxed text-lg">
+                  {study.paragraphs.map((paragraph) => (
+                    <p key={paragraph.slice(0, 48)}>
+                      {highlightText(paragraph, study.highlightPhrases)}
+                    </p>
+                  ))}
+
+                  <dl className="grid sm:grid-cols-3 gap-6 pt-6 border-t border-gray-200">
+                    {study.stats.map((stat) => (
+                      <div key={stat.label}>
+                        <dt className="text-xs font-oswald uppercase tracking-widest text-gray-400 mb-1">
+                          {stat.label}
+                        </dt>
+                        <dd className="text-2xl md:text-3xl font-oswald font-black text-gray-900 leading-tight">
+                          {stat.value}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </div>
+            </motion.article>
+          ))}
+        </div>
       </div>
     </section>
   );
