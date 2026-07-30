@@ -183,71 +183,82 @@ export function CaseStudies() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
-          className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start"
+          className="space-y-10 md:space-y-14"
         >
-          <div className="lg:col-span-4 space-y-6">
-            <div className="inline-flex items-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/google-logo.png"
-                alt="Google"
-                width={240}
-                height={80}
-                className="object-contain h-14 sm:h-16 md:h-20 w-auto max-w-[16rem]"
-              />
-            </div>
-            <p className="text-primary font-oswald font-bold uppercase tracking-widest text-sm">
-              September 2025 · Google HQ, King&apos;s Cross
-            </p>
-            <h3 className="text-3xl md:text-4xl font-oswald font-black uppercase text-gray-900 leading-tight">
-              The Camden Algorithm
-            </h3>
-            <Link
-              href={CAMDEN_ALGORITHM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-gray-900 font-oswald uppercase tracking-widest text-sm border-b-2 border-primary pb-1 hover:text-primary transition-colors"
-            >
-              View event page
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
+          <div className="relative w-full aspect-[16/10] md:aspect-[21/9] overflow-hidden bg-gray-200">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/camden-algorithm-content-1.png"
+              alt="Camden United youth steering committee and partners outside Google HQ for The Camden Algorithm"
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
           </div>
 
-          <div className="lg:col-span-8 space-y-6 text-gray-600 leading-relaxed text-lg">
-            <p>
-              In partnership with Google, Young Camden Foundation and Camden Giving, Camden
-              United helped deliver <strong className="text-gray-900 font-semibold">The Camden Algorithm</strong> —
-              a youth-led AI and careers event at Google HQ for young people aged 16–25 living,
-              working or studying in Camden.
-            </p>
-            <p>
-              Over six months, a Youth Steering Committee of 15 young people — including
-              Camden United members — co-designed and delivered the full programme. The day
-              brought together <strong className="text-gray-900 font-semibold">200+ attendees</strong> for
-              workshops on AI careers and personal branding, Google apprenticeship panels,
-              hands-on sessions with tools like Gemini and NotebookLM, and networking with
-              industry leaders and local civic partners.
-            </p>
-            <p>
-              The partnership showed what happens when a grassroots club and a global company
-              invest in young people from Camden: real access, real skills, and a platform
-              that proves football can open doors far beyond the pitch.
-            </p>
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            <div className="lg:col-span-4 space-y-6">
+              <div className="inline-flex items-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/google-logo.png"
+                  alt="Google"
+                  width={240}
+                  height={80}
+                  className="object-contain h-14 sm:h-16 md:h-20 w-auto max-w-[16rem]"
+                />
+              </div>
+              <p className="text-primary font-oswald font-bold uppercase tracking-widest text-sm">
+                September 2025 · Google HQ, King&apos;s Cross
+              </p>
+              <h3 className="text-3xl md:text-4xl font-oswald font-black uppercase text-gray-900 leading-tight">
+                The Camden Algorithm
+              </h3>
+              <Link
+                href={CAMDEN_ALGORITHM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-gray-900 font-oswald uppercase tracking-widest text-sm border-b-2 border-primary pb-1 hover:text-primary transition-colors"
+              >
+                View event page
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </div>
 
-            <dl className="grid sm:grid-cols-3 gap-6 pt-6 border-t border-gray-200">
-              {[
-                { label: 'Attendees', value: '200+' },
-                { label: 'Youth steers', value: '15' },
-                { label: 'Months to deliver', value: '6' },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <dt className="text-xs font-oswald uppercase tracking-widest text-gray-400 mb-1">
-                    {stat.label}
-                  </dt>
-                  <dd className="text-3xl font-oswald font-black text-gray-900">{stat.value}</dd>
-                </div>
-              ))}
-            </dl>
+            <div className="lg:col-span-8 space-y-6 text-gray-600 leading-relaxed text-lg">
+              <p>
+                In partnership with Google, Young Camden Foundation and Camden Giving, Camden
+                United helped deliver <strong className="text-gray-900 font-semibold">The Camden Algorithm</strong> —
+                a youth-led AI and careers event at Google HQ for young people aged 16–25 living,
+                working or studying in Camden.
+              </p>
+              <p>
+                Over six months, a Youth Steering Committee of 15 young people — including
+                Camden United members — co-designed and delivered the full programme. The day
+                brought together <strong className="text-gray-900 font-semibold">200+ attendees</strong> for
+                workshops on AI careers and personal branding, Google apprenticeship panels,
+                hands-on sessions with tools like Gemini and NotebookLM, and networking with
+                industry leaders and local civic partners.
+              </p>
+              <p>
+                The partnership showed what happens when a grassroots club and a global company
+                invest in young people from Camden: real access, real skills, and a platform
+                that proves football can open doors far beyond the pitch.
+              </p>
+
+              <dl className="grid sm:grid-cols-3 gap-6 pt-6 border-t border-gray-200">
+                {[
+                  { label: 'Attendees', value: '200+' },
+                  { label: 'Youth steers', value: '15' },
+                  { label: 'Months to deliver', value: '6' },
+                ].map((stat) => (
+                  <div key={stat.label}>
+                    <dt className="text-xs font-oswald uppercase tracking-widest text-gray-400 mb-1">
+                      {stat.label}
+                    </dt>
+                    <dd className="text-3xl font-oswald font-black text-gray-900">{stat.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           </div>
         </motion.article>
       </div>
