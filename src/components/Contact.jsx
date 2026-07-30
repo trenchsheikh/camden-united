@@ -13,7 +13,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Call Us',
-    details: ['+44 (0) 20 XXXX XXXX', 'Mon-Fri, 9AM-6PM'],
+    details: ['+44 (0) 20 XXXX XXXX', 'Mon to Fri, 9AM-6PM'],
     delay: 0.1,
   },
   {

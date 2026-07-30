@@ -16,9 +16,9 @@ export default function Home() {
       <SponsorsCarousel />
       <About />
       <Teams />
-      <Media />
       <Partners />
       <CaseStudies />
+      <Media />
       <Contact />
       <Footer />
     </main>

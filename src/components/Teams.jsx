@@ -2,24 +2,24 @@
 
 import { motion } from 'framer-motion';
 import { Users, Trophy, Star, ChevronRight, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import clsx from 'clsx';
+import { scrollToHash } from '@/lib/scroll';
 
 const teams = [
   {
     title: 'Midweek Teams',
-    age: 'Ages 16–25',
+    age: 'Ages 16 to 25',
     description:
-      'Two midweek sides for young men navigating life after school and into adulthood — football, mentoring, and a trusted peer network.',
+      'Two midweek sides for young men navigating life after school and into adulthood through football, mentoring, and a trusted peer network.',
     icon: Star,
     color: 'text-yellow-600',
     stat: '2 Teams',
   },
   {
-    title: 'Saturday Team',
-    age: 'Open Age',
+    title: 'First Team',
+    age: 'Open Age · Saturday',
     description:
-      'Our open-age Saturday squad competing regularly, keeping members connected through structured football and club life.',
+      'Our open age First Team competing regularly, keeping members connected through structured football and club life.',
     icon: Trophy,
     color: 'text-primary',
     stat: 'Open Age',
@@ -28,7 +28,7 @@ const teams = [
     title: 'Founding Members',
     age: 'Ages 25+',
     description:
-      'A side for founding members aged 25 and over — sustaining the relationships and leadership that built Camden United.',
+      'A side for founding members aged 25 and over, sustaining the relationships and leadership that built Camden United.',
     icon: Users,
     color: 'text-blue-600',
     stat: '25+',
@@ -51,18 +51,54 @@ export default function Teams() {
             </h2>
             <p className="mt-4 max-w-xl text-gray-500 text-base leading-relaxed">
               Camden United is for young men aged 16+. We run three teams so members get the
-              right support at every stage — plus the Munye League, connecting clubs across
+              right support at every stage, plus the Munye League, connecting clubs across
               Camden.
             </p>
           </div>
 
-          <Link
+          <a
             href="#contact"
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToHash('#contact');
+            }}
             className="group flex items-center gap-2 text-gray-900 font-oswald uppercase tracking-widest hover:text-primary transition-colors"
           >
             Get Involved <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </a>
         </div>
+
+        <motion.figure
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55 }}
+          className="mb-14 md:mb-16"
+        >
+          <div className="relative w-full overflow-hidden border border-gray-300 bg-white p-2 md:p-3 shadow-sm">
+            <div className="relative aspect-[16/10] md:aspect-[21/9] w-full overflow-hidden bg-gray-100">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/first-team.jpg"
+                alt="Camden United First Team celebrating with the trophy"
+                className="absolute inset-0 h-full w-full object-cover object-[center_30%]"
+              />
+            </div>
+          </div>
+          <figcaption className="mt-4 flex flex-wrap items-end justify-between gap-3 border-b border-gray-200 pb-4">
+            <div>
+              <p className="text-primary font-oswald font-bold uppercase tracking-widest text-xs mb-1">
+                The Squad
+              </p>
+              <h3 className="text-2xl md:text-3xl font-oswald font-black uppercase text-gray-900 leading-none">
+                First Team
+              </h3>
+            </div>
+            <p className="text-sm text-gray-500 max-w-md md:text-right leading-relaxed">
+              Open age Saturday side, competing for Camden United on and off the pitch.
+            </p>
+          </figcaption>
+        </motion.figure>
 
         <div className="grid lg:grid-cols-3 gap-8 mb-12">
           {teams.map((team, index) => (
@@ -94,12 +130,16 @@ export default function Teams() {
                 {team.description}
               </p>
 
-              <Link
+              <a
                 href="#contact"
+                onClick={(event) => {
+                  event.preventDefault();
+                  scrollToHash('#contact');
+                }}
                 className="inline-flex items-center gap-2 text-gray-900 font-bold uppercase text-xs tracking-widest group-hover:gap-3 transition-all"
               >
                 Learn More <ChevronRight className="w-3 h-3 text-primary" />
-              </Link>
+              </a>
             </motion.div>
           ))}
         </div>
@@ -119,8 +159,8 @@ export default function Teams() {
           </h3>
           <p className="text-white/80 max-w-3xl leading-relaxed">
             Founded and run by Camden United, the Munye League connects young people across
-            eight Camden-based clubs in the open-age league and five organisations in the
-            16–18 programme — a trusted network of support and opportunity across the borough.
+            eight Camden based clubs in the open age league and five organisations in the
+            16 to 18 programme: a trusted network of support and opportunity across the borough.
           </p>
         </motion.div>
       </div>

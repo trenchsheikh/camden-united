@@ -25,8 +25,8 @@ const caseStudies = [
       label: 'View event page',
     },
     paragraphs: [
-      'In partnership with Google, Young Camden Foundation and Camden Giving, Camden United helped deliver The Camden Algorithm — a youth-led AI and careers event at Google HQ for young people aged 16–25 living, working or studying in Camden.',
-      'Over six months, a Youth Steering Committee of 15 young people — including Camden United members — co-designed and delivered the full programme. The day brought together 200+ attendees for workshops on AI careers and personal branding, Google apprenticeship panels, hands-on sessions with tools like Gemini and NotebookLM, and networking with industry leaders and local civic partners.',
+      'In partnership with Google, Young Camden Foundation and Camden Giving, Camden United helped deliver The Camden Algorithm, a youth led AI and careers event at Google HQ for young people aged 16 to 25 living, working or studying in Camden.',
+      'Over six months, a Youth Steering Committee of 15 young people, including Camden United members, co designed and delivered the full programme. The day brought together 200+ attendees for workshops on AI careers and personal branding, Google apprenticeship panels, hands on sessions with tools like Gemini and NotebookLM, and networking with industry leaders and local civic partners.',
       'The partnership showed what happens when a grassroots club and a global company invest in young people from Camden: real access, real skills, and a platform that proves football can open doors far beyond the pitch.',
     ],
     highlightPhrases: ['The Camden Algorithm', '200+ attendees'],
@@ -43,18 +43,47 @@ const caseStudies = [
       'Young men from Camden United in a circle discussion during a mental resilience workshop',
     logo: null,
     eyebrow: 'Wellbeing · Youth programme',
-    meta: '7 June 2026 · 16:15–17:00 · Peckwater Estate, NW5 2UD',
+    meta: '7 June 2026 · 16:15 to 17:00 · Peckwater Estate, NW5 2UD',
     title: 'Mental Resilience Workshop',
     paragraphs: [
-      'Camden United hosted a Mental Resilience Workshop for young men in our community, creating a safe space to talk openly about pressure, wellbeing, and building mental strength — using trusted relationships and football culture as the way in.',
+      'Camden United hosted a Mental Resilience Workshop for young men in our community, creating a safe space to talk openly about pressure, wellbeing, and building mental strength, using trusted relationships and football culture as the way in.',
       'Guest speaker Jermaine Anderson (GMBPsS), a former professional footballer, shared lived experience and practical tools with members in a community setting at Peckwater Estate. Sessions like this sit at the heart of our mission: football first, then honest conversations that help young men seek support before reaching crisis point.',
-      'The workshop was delivered with support from GO! London and funded by the Mayor of London, in partnership with London Marathon Foundation, The National Lottery, and Sport England — showing how sport funding can unlock real mental health conversations for young people in Camden.',
+      'The workshop was delivered with support from GO! London and funded by the Mayor of London, in partnership with London Marathon Foundation, The National Lottery, and Sport England, showing how sport funding can unlock real mental health conversations for young people in Camden.',
     ],
     highlightPhrases: ['Jermaine Anderson (GMBPsS)', 'GO! London', 'Mayor of London'],
     stats: [
       { label: 'Guest speaker', value: 'Jermaine Anderson' },
       { label: 'Focus', value: 'Mental resilience' },
       { label: 'Funded by', value: 'Mayor of London' },
+    ],
+  },
+  {
+    id: '32-boro-cup',
+    image: '/boro-cup.jpeg',
+    imageAlt:
+      'Camden United players representing Camden at the London 32 Borough Cup',
+    logo: null,
+    eyebrow: 'Grassroots · London wide',
+    meta: 'London 32 Borough Cup · Representing Camden',
+    title: '32 Borough Cup',
+    link: {
+      href: 'https://thinkoutsidetheblox.co.uk/32-boro-cup',
+      label: 'About the 32 Boro Cup',
+    },
+    paragraphs: [
+      'Camden United took part in the London 32 Borough Cup, the annual grassroots tournament that brings together young players from across all 32 London boroughs. Founded to combat youth violence and strengthen community relations, the Cup uses football to unite young people from different walks of life on one pitch.',
+      'Representing Camden, our squad gave local young men a proud platform to compete citywide, build confidence, and connect with peers beyond their estates. Taking part meant more than matchday football: it was a chance to belong to something bigger, travel together as a team, and show what Camden talent looks like when young people are trusted and backed.',
+      'That is how we engage youth: through real competition, shared identity, and positive pathways that keep young men involved in sport and community life rather than on the sidelines. Events like the 32 Borough Cup sit alongside our weekly football, mentoring, and workshops as part of a wider journey of opportunity for Camden United members.',
+    ],
+    highlightPhrases: [
+      'London 32 Borough Cup',
+      'Representing Camden',
+      'combat youth violence',
+    ],
+    stats: [
+      { label: 'Representing', value: 'Camden' },
+      { label: 'London boroughs', value: '32' },
+      { label: 'Focus', value: 'Youth engagement' },
     ],
   },
 ];
@@ -81,8 +110,8 @@ function highlightText(text, phrases = []) {
 
 const partnerBenefits = [
   'Direct visibility with an engaged, growing local community',
-  'A genuine, story-led partnership — not just a logo placement',
-  'Association with a mission-driven club making a real difference for young people in Camden',
+  'A genuine, story led partnership, not just a logo placement',
+  'Association with a mission driven club making a real difference for young people in Camden',
   'Opportunities across shirt sponsorship, matchday and advertising placements, content collaboration, and community events',
 ];
 
@@ -154,18 +183,18 @@ export default function Partners() {
             </h3>
             <div className="space-y-5 text-gray-600 leading-relaxed">
               <p>
-                Camden United is more than a football club; we&apos;re a community-driven
+                Camden United is more than a football club; we&apos;re a community driven
                 movement founded by young people from Camden, built on the belief that
                 football should be a route to opportunity, not just competition. As a CIC
-                supporting young men aged 16+, we run three teams — Saturday open-age, two
-                midweek sides for ages 16–25, and a founding members team (25+) — giving
+                supporting young men aged 16+, we run three teams: Saturday open age First Team, two
+                midweek sides for ages 16 to 25, and a founding members team (25+), giving
                 members structure, belonging, and a pathway both on the pitch and off it.
               </p>
               <p>
                 Partnering with Camden United means aligning your brand with a genuine
                 grassroots story: real players, real community impact, and a mission rooted
                 in giving young people in Camden a stronger future. Our partners don&apos;t
-                just sponsor a shirt — they become part of that story, visible to our
+                just sponsor a shirt. They become part of that story, visible to our
                 community both in Camden and across London.
               </p>
             </div>

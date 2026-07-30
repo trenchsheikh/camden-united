@@ -2,21 +2,21 @@
 
 import { motion } from 'framer-motion';
 import { Heart, Users, Shield, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import clsx from 'clsx';
+import { scrollToHash } from '@/lib/scroll';
 
 const features = [
   {
     icon: Heart,
     title: 'Born From Community',
     description:
-      'Founded in 2019 as a CIC after friends were lost to serious youth violence — a support network that grew into Camden’s leading youth football provision for ages 16+.',
+      'Founded in 2019 as a CIC after friends were lost to serious youth violence. It began as a support network that grew into Camden’s leading youth football provision for ages 16+.',
   },
   {
     icon: Users,
     title: 'Lived Experience',
     description:
-      'Our founders, coaches, and volunteers grew up on Camden’s working-class estates, giving us the credibility to reach young men who may never access formal support services.',
+      'Our founders, coaches, and volunteers grew up on Camden’s working class estates, giving us the credibility to reach young men who may never access formal support services.',
   },
   {
     icon: Shield,
@@ -28,7 +28,7 @@ const features = [
 
 const stats = [
   { value: '2019', label: 'Founded as a CIC' },
-  { value: '80–100', label: 'Active members each week' },
+  { value: '80 to 100', label: 'Active members each week' },
   { value: '16+', label: 'Young men we support' },
   { value: '7 yrs', label: 'Sustained community delivery' },
 ];
@@ -58,37 +58,41 @@ export default function About() {
                 by a group of friends following the tragic loss of several close friends to
                 serious youth violence in Camden. What began as a support network for a few
                 friends and family has evolved into the borough&apos;s leading provider of youth
-                provision for young people aged 16+, supporting 80–100 active members each
+                provision for young people aged 16+, supporting 80 to 100 active members each
                 week through football, mentoring, and personal development.
               </p>
               <p>
-                Football is how we bring young men together — but our work goes further.
-                Through trusted relationships and long-term support, we help members build
+                Football is how we bring young men together, but our work goes further.
+                Through trusted relationships and long term support, we help members build
                 resilience, ambition, and wellbeing, and connect them to workshops and
-                opportunities across Camden. We run an open-age Saturday team, two midweek
-                teams for ages 16–25, and a side for founding members aged 25 and over.
+                opportunities across Camden. We run an open age Saturday team, two midweek
+                teams for ages 16 to 25, and a side for founding members aged 25 and over.
               </p>
               <p>
-                Through the Munye League — founded and run by Camden United — we also connect
-                young people across eight Camden-based clubs in the open-age league and five
-                organisations in the 16–18 programme, creating a trusted network of support
+                Through the Munye League, founded and run by Camden United, we also connect
+                young people across eight Camden based clubs in the open age league and five
+                organisations in the 16 to 18 programme, creating a trusted network of support
                 and opportunity beyond our own squads.
               </p>
             </div>
 
             <p className="text-gray-800 font-medium text-xl leading-relaxed italic border-l-4 border-primary pl-6 mb-10">
               &ldquo;Working with young men is central to our mission. Through lived experience
-              and long-term support, we help them build resilience, develop ambition, and
+              and long term support, we help them build resilience, develop ambition, and
               create positive futures for themselves and their communities.&rdquo;
             </p>
 
-            <Link
+            <a
               href="#partners"
+              onClick={(event) => {
+                event.preventDefault();
+                scrollToHash('#partners');
+              }}
               className="inline-flex items-center gap-3 px-8 py-3 border-2 border-gray-900 text-gray-900 font-oswald font-bold uppercase tracking-widest hover:bg-gray-900 hover:text-white transition-colors"
             >
               Partner With Us
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </a>
           </motion.div>
 
           <div className="space-y-6">

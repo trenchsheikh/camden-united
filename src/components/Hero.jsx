@@ -2,12 +2,11 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
+import { scrollToHash } from '@/lib/scroll';
 
 export default function Hero() {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-white">
-      {/* Background Image */}
       <div className="absolute inset-0 z-0 select-none">
         <Image
           src="/sunday.jpg"
@@ -17,12 +16,10 @@ export default function Hero() {
           priority
           style={{ objectPosition: '55% 60%' }}
         />
-        {/* Gradient Overlay for Fade Effect - Light Theme */}
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-16 pb-20">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -48,13 +45,17 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            <Link
+            <a
               href="#about"
+              onClick={(event) => {
+                event.preventDefault();
+                scrollToHash('#about');
+              }}
               className="group relative inline-flex items-center justify-center px-8 py-3 md:px-10 md:py-4 bg-primary text-white font-oswald font-bold uppercase tracking-widest text-base md:text-lg overflow-hidden rounded-full hover:bg-gray-900 transition-all shadow-xl shadow-primary/30"
             >
               <span className="relative z-10">Read More</span>
               <div className="absolute inset-0 h-full w-full scale-0 rounded-full transition-all duration-300 group-hover:scale-100 group-hover:bg-gray-900/50" />
-            </Link>
+            </a>
           </motion.div>
         </motion.div>
       </div>
