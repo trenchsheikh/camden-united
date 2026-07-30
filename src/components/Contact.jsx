@@ -19,7 +19,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    details: ['info@camdenunited.com', "We'll respond shortly"],
+    details: ['lida@camdenunitedfc.com', "We'll respond shortly"],
     delay: 0.2,
   },
 ];
@@ -56,11 +56,21 @@ export default function Contact() {
               </div>
               <h3 className="text-2xl font-oswald font-bold text-gray-900 uppercase mb-4">{item.title}</h3>
               <div className="space-y-1">
-                {item.details.map((detail, idx) => (
-                  <p key={idx} className="text-gray-500 text-sm font-medium">
-                    {detail}
-                  </p>
-                ))}
+                {item.details.map((detail, idx) =>
+                  item.title === 'Email Us' && idx === 0 ? (
+                    <a
+                      key={idx}
+                      href={`mailto:${detail}`}
+                      className="block text-gray-500 text-sm font-medium hover:text-primary transition-colors"
+                    >
+                      {detail}
+                    </a>
+                  ) : (
+                    <p key={idx} className="text-gray-500 text-sm font-medium">
+                      {detail}
+                    </p>
+                  )
+                )}
               </div>
             </motion.div>
           ))}
@@ -74,9 +84,12 @@ export default function Contact() {
              
              <div className="relative z-10">
                 <h3 className="text-3xl md:text-5xl font-oswald font-black uppercase text-white mb-8">Ready to Join Camden United?</h3>
-                <button className="bg-white text-primary font-oswald font-bold uppercase tracking-widest py-4 px-10 hover:bg-gray-900 hover:text-white transition-colors shadow-2xl">
-                    Register Now
-                </button>
+                <a
+                  href="mailto:lida@camdenunitedfc.com"
+                  className="inline-block bg-white text-primary font-oswald font-bold uppercase tracking-widest py-4 px-10 hover:bg-gray-900 hover:text-white transition-colors shadow-2xl"
+                >
+                    Get In Touch
+                </a>
              </div>
         </div>
 

@@ -86,10 +86,10 @@ export default function Partners() {
               <p>
                 Camden United is more than a football club; we&apos;re a community-driven
                 movement founded by young people from Camden, built on the belief that
-                football should be a route to opportunity, not just competition. From youth
-                development (ages 8–16) through to our senior squad, we run 12+ teams across
-                the community, giving young people in Camden structure, belonging, and a
-                pathway — both on the pitch and off it.
+                football should be a route to opportunity, not just competition. As a CIC
+                supporting young men aged 16+, we run three teams — Saturday open-age, two
+                midweek sides for ages 16–25, and a founding members team (25+) — giving
+                members structure, belonging, and a pathway both on the pitch and off it.
               </p>
               <p>
                 Partnering with Camden United means aligning your brand with a genuine

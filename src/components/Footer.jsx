@@ -26,7 +26,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
-              Transforming lives through football. Join the movement and become part of our story.
+              A Camden CIC for young men aged 16+. Football, mentoring, and pathways — founded by the community, for the community.
             </p>
             <div className="flex gap-4">
               {[Facebook, Twitter, Instagram].map((Icon, idx) => (
@@ -48,7 +48,7 @@ export default function Footer() {
               },
               {
                   title: "Teams",
-                  links: ["First Team", "Academy", "Ladies", "Community"]
+                  links: ["Midweek Teams", "Saturday Team", "Founding Members", "Munye League"]
               },
               {
                   title: "Support",

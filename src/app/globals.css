@@ -49,16 +49,3 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: #b91c1c; 
 }
-
-@keyframes sponsor-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@utility animate-sponsor-marquee {
-  animation: sponsor-marquee 28s linear infinite;
-}
