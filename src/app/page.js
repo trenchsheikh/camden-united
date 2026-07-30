@@ -5,6 +5,7 @@ import LeagueTable from '@/components/LeagueTable';
 import About from '@/components/About';
 import Teams from '@/components/Teams';
 import Media from '@/components/Media';
+import Partners, { CaseStudies } from '@/components/Partners';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -18,6 +19,8 @@ export default function Home() {
       <About />
       <Teams />
       <Media />
+      <Partners />
+      <CaseStudies />
       <Contact />
       <Footer />
     </main>

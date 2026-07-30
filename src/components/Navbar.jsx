@@ -24,6 +24,7 @@ export default function Navbar() {
     { name: 'Matches', href: '#matches' },
     { name: 'Teams', href: '#teams' },
     { name: 'Media', href: '#media' },
+    { name: 'Partner With Us', href: '#partners' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -58,12 +59,12 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-5 xl:space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-gray-600 hover:text-primary font-oswald font-medium text-sm uppercase tracking-widest transition-colors relative group"
+                className="text-gray-600 hover:text-primary font-oswald font-medium text-sm uppercase tracking-widest transition-colors relative group whitespace-nowrap"
               >
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
