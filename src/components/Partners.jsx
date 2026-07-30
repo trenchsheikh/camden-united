@@ -285,18 +285,9 @@ export function CaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: index * 0.05 }}
-              className="space-y-10 md:space-y-14"
+              className="space-y-8 md:space-y-10"
             >
-              {index > 0 ? <div className="border-t border-gray-200" /> : null}
-
-              <div className="relative w-full aspect-[16/10] md:aspect-[21/9] overflow-hidden bg-gray-200">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={study.image}
-                  alt={study.imageAlt}
-                  className="absolute inset-0 h-full w-full object-cover object-center"
-                />
-              </div>
+              {index > 0 ? <div className="border-t border-gray-200 pt-16 md:pt-20" /> : null}
 
               <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
                 <div className="lg:col-span-4 space-y-6">
@@ -335,6 +326,25 @@ export function CaseStudies() {
                       <ArrowUpRight className="h-4 w-4" />
                     </Link>
                   ) : null}
+
+                  <div
+                    className={`overflow-hidden bg-gray-100 border border-gray-200 ${
+                      study.id === 'camden-algorithm'
+                        ? 'max-w-sm'
+                        : 'w-full'
+                    }`}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={study.image}
+                      alt={study.imageAlt}
+                      className={`w-full h-auto object-contain ${
+                        study.id === 'camden-algorithm'
+                          ? 'max-h-56 md:max-h-64'
+                          : 'max-h-72 md:max-h-80'
+                      }`}
+                    />
+                  </div>
                 </div>
 
                 <div className="lg:col-span-8 space-y-6 text-gray-600 leading-relaxed text-lg">
