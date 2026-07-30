@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import SponsorsCarousel from '@/components/SponsorsCarousel';
 import About from '@/components/About';
 import Teams from '@/components/Teams';
 import Media from '@/components/Media';
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       <Navbar />
       <Hero />
+      <SponsorsCarousel />
       <About />
       <Teams />
       <Media />

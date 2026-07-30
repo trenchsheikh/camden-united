@@ -4,39 +4,10 @@ import { motion } from 'framer-motion';
 import { Check, Mail, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 
+import { sponsors } from '@/data/sponsors';
+
 const PARTNER_EMAIL = 'admin@camdenunitedfc.com';
 const CAMDEN_ALGORITHM_URL = 'https://rsvp.withgoogle.com/events/camdenalgorithm/home';
-
-const currentPartners = [
-  {
-    name: 'Google',
-    src: '/google-logo.png',
-    width: 160,
-    height: 54,
-    className: 'h-10 md:h-12',
-  },
-  {
-    name: 'Camden Fostering',
-    src: '/camdenfostering-removebg-preview.png',
-    width: 160,
-    height: 80,
-    className: 'h-14 md:h-16',
-  },
-  {
-    name: 'AHA Global',
-    src: '/aha-removebg-preview.png',
-    width: 200,
-    height: 60,
-    className: 'h-10 md:h-12',
-  },
-  {
-    name: 'V7',
-    src: '/v7-removebg-preview.png',
-    width: 100,
-    height: 100,
-    className: 'h-14 md:h-16',
-  },
-];
 
 const partnerBenefits = [
   'Direct visibility with an engaged, growing local community',
@@ -81,11 +52,11 @@ export default function Partners() {
           <h3 className="text-sm font-oswald font-bold uppercase tracking-widest text-gray-500 mb-8">
             Current Partners
           </h3>
-          <div className="flex flex-wrap items-center gap-6 md:gap-10 py-8 border-y border-gray-200">
-            {currentPartners.map((partner) => (
+          <div className="flex flex-wrap items-center gap-8 md:gap-14 py-10 border-y border-gray-200">
+            {sponsors.map((partner) => (
               <div
                 key={partner.name}
-                className="flex items-center justify-center min-h-[5.5rem]"
+                className="flex items-center justify-center min-h-[7rem] md:min-h-[8.5rem]"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -93,7 +64,7 @@ export default function Partners() {
                   alt={`${partner.name} logo`}
                   width={partner.width}
                   height={partner.height}
-                  className={`object-contain w-auto max-w-[11rem] ${partner.className}`}
+                  className="object-contain w-auto h-20 sm:h-24 md:h-28 max-w-[16rem] md:max-w-[18rem]"
                 />
               </div>
             ))}
