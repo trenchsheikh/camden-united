@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import { sponsors } from '@/data/sponsors';
 
-const PARTNER_EMAIL = 'admin@camdenunitedfc.com';
+const PARTNER_EMAIL = 'lida@camdenunitedfc.com';
 const CAMDEN_ALGORITHM_URL = 'https://rsvp.withgoogle.com/events/camdenalgorithm/home';
 
 const partnerBenefits = [
