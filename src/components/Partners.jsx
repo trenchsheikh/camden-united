@@ -163,7 +163,10 @@ export default function Partners() {
                   alt={`${partner.name} logo`}
                   width={partner.width}
                   height={partner.height}
-                  className="object-contain w-auto h-20 sm:h-24 md:h-28 max-w-[16rem] md:max-w-[18rem]"
+                  className={`object-contain w-auto ${
+                    partner.className ||
+                    'h-20 sm:h-24 md:h-28 max-w-[16rem] md:max-w-[18rem]'
+                  }`}
                 />
               </div>
             ))}

@@ -29,7 +29,7 @@ export default function SponsorsCarousel() {
                 alt={`${sponsor.name} logo`}
                 width={sponsor.width}
                 height={sponsor.height}
-                className="object-contain w-auto h-20 sm:h-24 md:h-28 lg:h-32 max-w-[14rem] sm:max-w-[16rem] md:max-w-[18rem]"
+                className={`object-contain w-auto ${sponsor.className}`}
                 draggable={false}
               />
             </div>
