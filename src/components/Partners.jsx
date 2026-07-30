@@ -191,9 +191,9 @@ export function CaseStudies() {
               <img
                 src="/google-logo.png"
                 alt="Google"
-                width={140}
-                height={48}
-                className="object-contain h-8 w-auto"
+                width={240}
+                height={80}
+                className="object-contain h-14 sm:h-16 md:h-20 w-auto max-w-[16rem]"
               />
             </div>
             <p className="text-primary font-oswald font-bold uppercase tracking-widest text-sm">
