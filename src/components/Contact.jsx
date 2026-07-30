@@ -7,19 +7,19 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Visit Us',
-    details: ['Camden, London', 'United Kingdom'],
+    details: ['30 Bertram St', 'London N19 5DQ, United Kingdom'],
     delay: 0,
   },
   {
     icon: Phone,
     title: 'Call Us',
-    details: ['+44 (0) 20 XXXX XXXX', 'Mon to Fri, 9AM-6PM'],
+    details: ['+447429362957', 'Mon to Fri, 9AM-6PM'],
     delay: 0.1,
   },
   {
     icon: Mail,
     title: 'Email Us',
-    details: ['lida@camdenunitedfc.com', "We'll respond shortly"],
+    details: ['admin@camdenunitedfc.com', "We'll respond shortly"],
     delay: 0.2,
   },
 ];
@@ -65,6 +65,14 @@ export default function Contact() {
                     >
                       {detail}
                     </a>
+                  ) : item.title === 'Call Us' && idx === 0 ? (
+                    <a
+                      key={idx}
+                      href={`tel:${detail}`}
+                      className="block text-gray-500 text-sm font-medium hover:text-primary transition-colors"
+                    >
+                      {detail}
+                    </a>
                   ) : (
                     <p key={idx} className="text-gray-500 text-sm font-medium">
                       {detail}
@@ -85,7 +93,7 @@ export default function Contact() {
              <div className="relative z-10">
                 <h3 className="text-3xl md:text-5xl font-oswald font-black uppercase text-white mb-8">Ready to Join Camden United?</h3>
                 <a
-                  href="mailto:lida@camdenunitedfc.com"
+                  href="mailto:admin@camdenunitedfc.com"
                   className="inline-block bg-white text-primary font-oswald font-bold uppercase tracking-widest py-4 px-10 hover:bg-gray-900 hover:text-white transition-colors shadow-2xl"
                 >
                     Get In Touch

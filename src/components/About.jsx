@@ -77,9 +77,9 @@ export default function About() {
             </div>
 
             <p className="text-gray-800 font-medium text-xl leading-relaxed italic border-l-4 border-primary pl-6 mb-10">
-              &ldquo;Working with young men is central to our mission. Through lived experience
+              Working with young men is central to our mission. Through lived experience
               and long term support, we help them build resilience, develop ambition, and
-              create positive futures for themselves and their communities.&rdquo;
+              create positive futures for themselves and their communities.
             </p>
 
             <a
