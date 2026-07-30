@@ -21,7 +21,6 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '#about' },
-    { name: 'Matches', href: '#matches' },
     { name: 'Teams', href: '#teams' },
     { name: 'Media', href: '#media' },
     { name: 'Partner With Us', href: '#partners' },

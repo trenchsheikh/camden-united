@@ -10,15 +10,31 @@ const CAMDEN_ALGORITHM_URL = 'https://rsvp.withgoogle.com/events/camdenalgorithm
 const currentPartners = [
   {
     name: 'Google',
-    src: '/google-logo.svg',
-    width: 140,
-    height: 48,
+    src: '/google-logo.png',
+    width: 160,
+    height: 54,
+    className: 'h-10 md:h-12',
   },
   {
-    name: 'AWAL',
-    src: '/AWAL-Logo.png',
-    width: 120,
-    height: 48,
+    name: 'Camden Fostering',
+    src: '/camdenfostering-removebg-preview.png',
+    width: 160,
+    height: 80,
+    className: 'h-14 md:h-16',
+  },
+  {
+    name: 'AHA Global',
+    src: '/aha-removebg-preview.png',
+    width: 200,
+    height: 60,
+    className: 'h-10 md:h-12',
+  },
+  {
+    name: 'V7',
+    src: '/v7-removebg-preview.png',
+    width: 100,
+    height: 100,
+    className: 'h-14 md:h-16',
   },
 ];
 
@@ -65,11 +81,11 @@ export default function Partners() {
           <h3 className="text-sm font-oswald font-bold uppercase tracking-widest text-gray-500 mb-8">
             Current Partners
           </h3>
-          <div className="flex flex-wrap items-center gap-10 md:gap-16 py-8 border-y border-gray-200">
+          <div className="flex flex-wrap items-center gap-4 md:gap-6 py-8 border-y border-gray-200">
             {currentPartners.map((partner) => (
               <div
                 key={partner.name}
-                className="relative flex items-center justify-center h-14 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                className="bg-black px-5 py-4 flex items-center justify-center min-h-[5.5rem]"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -77,7 +93,7 @@ export default function Partners() {
                   alt={`${partner.name} logo`}
                   width={partner.width}
                   height={partner.height}
-                  className="object-contain h-10 md:h-12 w-auto"
+                  className={`object-contain w-auto max-w-[11rem] ${partner.className}`}
                 />
               </div>
             ))}
@@ -199,13 +215,13 @@ export function CaseStudies() {
           className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start"
         >
           <div className="lg:col-span-4 space-y-6">
-            <div className="inline-flex items-center gap-3">
+            <div className="inline-flex items-center bg-black px-4 py-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/google-logo.svg"
+                src="/google-logo.png"
                 alt="Google"
-                width={110}
-                height={38}
+                width={140}
+                height={48}
                 className="object-contain h-8 w-auto"
               />
             </div>

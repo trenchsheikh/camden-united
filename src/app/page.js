@@ -1,7 +1,5 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import MatchStats from '@/components/MatchStats';
-import LeagueTable from '@/components/LeagueTable';
 import About from '@/components/About';
 import Teams from '@/components/Teams';
 import Media from '@/components/Media';
@@ -14,8 +12,6 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       <Navbar />
       <Hero />
-      <MatchStats />
-      <LeagueTable />
       <About />
       <Teams />
       <Media />
