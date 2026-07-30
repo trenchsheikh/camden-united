@@ -329,7 +329,7 @@ export function CaseStudies() {
 
                   <div
                     className={`overflow-hidden bg-gray-100 border border-gray-200 ${
-                      study.id === 'camden-algorithm'
+                      study.id === 'camden-algorithm' || study.id === 'mental-resilience'
                         ? 'max-w-sm'
                         : 'w-full'
                     }`}
@@ -339,7 +339,7 @@ export function CaseStudies() {
                       src={study.image}
                       alt={study.imageAlt}
                       className={`w-full h-auto object-contain ${
-                        study.id === 'camden-algorithm'
+                        study.id === 'camden-algorithm' || study.id === 'mental-resilience'
                           ? 'max-h-56 md:max-h-64'
                           : 'max-h-72 md:max-h-80'
                       }`}
