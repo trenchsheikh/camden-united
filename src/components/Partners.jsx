@@ -81,11 +81,11 @@ export default function Partners() {
           <h3 className="text-sm font-oswald font-bold uppercase tracking-widest text-gray-500 mb-8">
             Current Partners
           </h3>
-          <div className="flex flex-wrap items-center gap-4 md:gap-6 py-8 border-y border-gray-200">
+          <div className="flex flex-wrap items-center gap-6 md:gap-10 py-8 border-y border-gray-200">
             {currentPartners.map((partner) => (
               <div
                 key={partner.name}
-                className="bg-black px-5 py-4 flex items-center justify-center min-h-[5.5rem]"
+                className="flex items-center justify-center min-h-[5.5rem]"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -215,7 +215,7 @@ export function CaseStudies() {
           className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start"
         >
           <div className="lg:col-span-4 space-y-6">
-            <div className="inline-flex items-center bg-black px-4 py-2">
+            <div className="inline-flex items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/google-logo.png"
