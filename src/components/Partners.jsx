@@ -229,12 +229,12 @@ export default function Partners() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="bg-gray-900 text-white px-8 py-12 md:px-14 md:py-16 relative overflow-hidden"
+          className="bg-gray-900 text-white px-6 py-12 sm:px-8 md:px-14 md:py-16 relative overflow-hidden"
         >
           <div className="absolute -right-10 -top-10 text-[10rem] font-oswald font-black text-white/5 leading-none select-none pointer-events-none uppercase">
             Partners
           </div>
-          <div className="relative z-10 max-w-3xl">
+          <div className="relative z-10 max-w-3xl min-w-0">
             <p className="text-white/90 text-lg md:text-xl leading-relaxed mb-8">
               We&apos;re proud to be backed by partners including Google, whose support has
               helped power both our team and our work in the community.
@@ -244,11 +244,11 @@ export default function Partners() {
             </p>
             <a
               href={`mailto:${PARTNER_EMAIL}`}
-              className="group inline-flex items-center gap-3 text-2xl md:text-3xl font-oswald font-bold uppercase tracking-wide text-white hover:text-primary transition-colors"
+              className="group inline-flex max-w-full flex-wrap items-center gap-x-3 gap-y-2 text-lg sm:text-2xl md:text-3xl font-oswald font-bold uppercase tracking-normal sm:tracking-wide text-white hover:text-primary transition-colors"
             >
-              <Mail className="h-6 w-6 text-primary" />
-              {PARTNER_EMAIL}
-              <ArrowUpRight className="h-5 w-5 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all" />
+              <Mail className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 text-primary" />
+              <span className="min-w-0 break-all">{PARTNER_EMAIL}</span>
+              <ArrowUpRight className="h-5 w-5 shrink-0 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all" />
             </a>
           </div>
         </motion.div>
