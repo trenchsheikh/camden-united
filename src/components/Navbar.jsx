@@ -81,12 +81,12 @@ export default function Navbar() {
             onClick={(event) => handleNavClick(event, '/')}
             className="flex items-center gap-3 group"
           >
-            <div className="relative w-10 h-10 overflow-hidden rounded-full border-2 border-gray-200 group-hover:border-primary transition-colors">
+            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-gray-200 bg-black group-hover:border-primary transition-colors">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/cu-logo.png"
                 alt="Camden United Logo"
-                className="object-cover w-full h-full"
+                className="absolute inset-0 h-full w-full object-cover object-center scale-[1.22]"
               />
             </div>
             <div className="flex flex-col">
