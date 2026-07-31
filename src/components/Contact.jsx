@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone } from 'lucide-react';
+import { scrollToHash } from '@/lib/scroll';
 
 const contactInfo = [
   {
@@ -9,6 +10,7 @@ const contactInfo = [
     title: 'Visit Us',
     details: ['30 Bertram St', 'London N19 5DQ, United Kingdom'],
     delay: 0,
+    href: '#location',
   },
   {
     icon: Phone,
@@ -57,7 +59,19 @@ export default function Contact() {
               <h3 className="text-2xl font-oswald font-bold text-gray-900 uppercase mb-4">{item.title}</h3>
               <div className="space-y-1">
                 {item.details.map((detail, idx) =>
-                  item.title === 'Email Us' && idx === 0 ? (
+                  item.href ? (
+                    <a
+                      key={idx}
+                      href={item.href}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        scrollToHash(item.href, 88);
+                      }}
+                      className="block text-gray-500 text-sm font-medium hover:text-primary transition-colors"
+                    >
+                      {detail}
+                    </a>
+                  ) : item.title === 'Email Us' && idx === 0 ? (
                     <a
                       key={idx}
                       href={`mailto:${detail}`}

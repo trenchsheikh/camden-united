@@ -29,6 +29,7 @@ export default function Navbar() {
     { name: 'Case Studies', href: '#case-studies' },
     { name: 'In Memory', href: '#in-memory' },
     { name: 'Media', href: '#media' },
+    { name: 'Location', href: '#location' },
     { name: 'Contact', href: '#contact' },
   ];
 

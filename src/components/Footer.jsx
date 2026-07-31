@@ -28,6 +28,7 @@ const footerColumns = [
     title: 'Connect',
     links: [
       { name: 'Media', href: '#media' },
+      { name: 'Location', href: '#location' },
       { name: 'Contact', href: '#contact' },
       { name: 'Instagram', href: INSTAGRAM_URL, external: true },
     ],
