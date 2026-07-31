@@ -11,7 +11,7 @@ const featuredSquads = [
     alt: 'Camden United First Team celebrating with the trophy',
     caption: 'Open age Saturday side, competing for Camden United on and off the pitch.',
     aspectClass: 'aspect-[16/10] md:aspect-[21/9]',
-    imageClass: 'object-cover object-[center_30%]',
+    imageClass: 'object-cover object-[center_45%]',
   },
   {
     title: 'Midweek Teams',
@@ -19,7 +19,7 @@ const featuredSquads = [
     alt: 'Camden United midweek teams group photo on the pitch',
     caption: 'Ages 16 to 25, using football, mentoring, and peer support through the week.',
     aspectClass: 'aspect-[16/10] md:aspect-[21/9]',
-    imageClass: 'object-cover object-center',
+    imageClass: 'object-cover object-[center_55%]',
   },
 ];
 
