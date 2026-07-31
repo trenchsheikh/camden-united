@@ -151,11 +151,11 @@ export default function Partners() {
           <h3 className="text-sm font-oswald font-bold uppercase tracking-widest text-gray-500 mb-8">
             Current Partners
           </h3>
-          <div className="flex flex-wrap items-center gap-8 md:gap-14 py-10 border-y border-gray-200">
+          <div className="flex flex-wrap items-center gap-6 md:gap-10 py-8 border-y border-gray-200">
             {sponsors.map((partner) => (
               <div
                 key={partner.name}
-                className="flex items-center justify-center min-h-[7rem] md:min-h-[8.5rem]"
+                className="flex items-center justify-center min-h-[5.5rem]"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -163,10 +163,7 @@ export default function Partners() {
                   alt={`${partner.name} logo`}
                   width={partner.width}
                   height={partner.height}
-                  className={`object-contain w-auto ${
-                    partner.className ||
-                    'h-20 sm:h-24 md:h-28 max-w-[16rem] md:max-w-[18rem]'
-                  }`}
+                  className={`object-contain w-auto ${partner.className}`}
                 />
               </div>
             ))}

@@ -18,8 +18,9 @@ const featuredSquads = [
     src: '/midweek.jpg',
     alt: 'Camden United midweek teams group photo on the pitch',
     caption: 'Ages 16 to 25, using football, mentoring, and peer support through the week.',
-    aspectClass: 'aspect-[16/10] md:aspect-[21/9]',
-    imageClass: 'object-cover object-[center_55%]',
+    aspectClass: 'aspect-[4/5]',
+    imageClass: 'object-contain object-center',
+    maxWidthClass: 'max-w-xl md:max-w-2xl mx-auto md:mx-0',
   },
 ];
 
@@ -44,13 +45,17 @@ const pairedSquads = [
 ];
 
 function SquadFigure({ squad, delay = 0 }) {
+  const widthClass =
+    squad.maxWidthClass ||
+    (squad.compact ? 'max-w-md md:max-w-lg mx-auto md:mx-0' : '');
+
   return (
     <motion.figure
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.55, delay }}
-      className={`w-full min-w-0 ${squad.compact ? 'max-w-md md:max-w-lg mx-auto md:mx-0' : ''}`}
+      className={`w-full min-w-0 ${widthClass}`}
     >
       <div className="relative w-full overflow-hidden border border-gray-300 bg-white p-2 sm:p-3 shadow-sm">
         <div
