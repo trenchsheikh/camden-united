@@ -71,25 +71,10 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-gray-200 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-gray-500 text-xs uppercase tracking-wider">
+        <div className="border-t border-gray-200 pt-10">
+          <p className="text-gray-500 text-xs uppercase tracking-wider text-center md:text-left">
             &copy; {currentYear} Camden United FC. All rights reserved.
           </p>
-           <div className="flex items-center gap-2">
-               <span className="text-gray-500 text-sm uppercase tracking-wider">Designed by</span>
-                <a 
-                href="https://lunolabs.xyz" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:opacity-80 transition-opacity"
-              >
-                <img 
-                  src="/Luno-logo.png" 
-                  alt="Luno Labs" 
-                  className="h-10 w-auto transition-all duration-300"
-                />
-              </a>
-            </div>
         </div>
 
       </div>

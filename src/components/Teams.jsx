@@ -10,6 +10,7 @@ const featuredSquads = [
     src: '/first-team.jpg',
     alt: 'Camden United First Team celebrating with the trophy',
     caption: 'Open age Saturday side, competing for Camden United on and off the pitch.',
+    aspectClass: 'aspect-[16/10] md:aspect-[21/9]',
     imageClass: 'object-cover object-[center_30%]',
   },
   {
@@ -17,7 +18,8 @@ const featuredSquads = [
     src: '/midweek.jpg',
     alt: 'Camden United midweek teams group photo on the pitch',
     caption: 'Ages 16 to 25, using football, mentoring, and peer support through the week.',
-    imageClass: 'object-contain object-center',
+    aspectClass: 'aspect-[16/10] md:aspect-[21/9]',
+    imageClass: 'object-cover object-center',
   },
 ];
 
@@ -27,37 +29,38 @@ const pairedSquads = [
     src: '/founding.png',
     alt: 'Camden United founding members team photo on the pitch',
     caption: 'Ages 25 and over, sustaining the relationships and leadership that built the club.',
+    aspectClass: 'aspect-[3/4]',
+    imageClass: 'object-contain object-center',
+    compact: true,
   },
   {
     title: 'Munye League U18',
     src: '/munye-league-team.jpeg',
     alt: 'Munye League under 18 team celebrating with medals and a trophy',
     caption: 'Ages 16 to 18, using football to engage young men, then workshops and mentorship.',
+    aspectClass: 'aspect-[4/3]',
+    imageClass: 'object-cover object-center',
   },
 ];
 
-function SquadFigure({ squad, compact = false, delay = 0 }) {
+function SquadFigure({ squad, delay = 0 }) {
   return (
     <motion.figure
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.55, delay }}
-      className="w-full min-w-0"
+      className={`w-full min-w-0 ${squad.compact ? 'max-w-md md:max-w-lg mx-auto md:mx-0' : ''}`}
     >
       <div className="relative w-full overflow-hidden border border-gray-300 bg-white p-2 sm:p-3 shadow-sm">
         <div
-          className={`relative w-full overflow-hidden bg-gray-100 ${
-            compact ? 'aspect-[4/5] sm:aspect-[3/4]' : 'aspect-[4/3] sm:aspect-[16/10] lg:aspect-[21/9]'
-          }`}
+          className={`relative w-full overflow-hidden bg-gray-100 ${squad.aspectClass}`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={squad.src}
             alt={squad.alt}
-            className={`absolute inset-0 h-full w-full ${
-              squad.imageClass || 'object-contain object-center'
-            }`}
+            className={`absolute inset-0 h-full w-full ${squad.imageClass}`}
           />
         </div>
       </div>
@@ -121,7 +124,6 @@ export default function Teams() {
               <SquadFigure
                 key={squad.title}
                 squad={squad}
-                compact
                 delay={0.1 + index * 0.05}
               />
             ))}
