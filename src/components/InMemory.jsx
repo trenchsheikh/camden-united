@@ -8,36 +8,36 @@ const ARTICLE_URL =
 
 export default function InMemory() {
   return (
-    <section id="in-memory" className="py-24 bg-gray-900 text-white relative overflow-hidden">
+    <section id="in-memory" className="py-16 sm:py-20 md:py-24 bg-gray-900 text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-black pointer-events-none" />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-14 max-w-3xl"
+          className="mb-10 sm:mb-14 max-w-3xl"
         >
           <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-2">
             In Memory
           </h4>
-          <h2 className="text-4xl md:text-6xl font-oswald font-black uppercase leading-none mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-oswald font-black uppercase leading-none mb-4">
             Abdulaziz Munye
           </h2>
-          <p className="text-white/60 font-oswald uppercase tracking-widest text-sm mb-6">
+          <p className="text-white/60 font-oswald uppercase tracking-widest text-xs sm:text-sm mb-6">
             Co founder · Rest in power · 1996 to 2022
           </p>
           <div className="w-20 h-2 bg-primary" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
-            className="lg:col-span-7 space-y-6 text-white/80 text-lg leading-relaxed"
+            className="lg:col-span-7 space-y-5 sm:space-y-6 text-white/80 text-base sm:text-lg leading-relaxed min-w-0"
           >
             <p>
               Abdulaziz Munye co founded Camden United FC to help combat youth violence and
@@ -79,7 +79,7 @@ export default function InMemory() {
               href={ARTICLE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-primary text-white font-oswald font-bold uppercase tracking-widest px-8 py-4 hover:bg-white hover:text-gray-900 transition-colors"
+              className="inline-flex items-center justify-center gap-3 bg-primary text-white font-oswald font-bold uppercase tracking-widest px-6 sm:px-8 py-3.5 sm:py-4 hover:bg-white hover:text-gray-900 transition-colors text-sm sm:text-base w-full sm:w-auto text-center"
             >
               Read Camden New Journal tribute
               <ExternalLink className="h-4 w-4" />
@@ -91,7 +91,7 @@ export default function InMemory() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="lg:col-span-5 space-y-8"
+            className="lg:col-span-5 space-y-6 sm:space-y-8 min-w-0"
           >
             <figure className="space-y-4">
               <div className="overflow-hidden border border-white/15 bg-black/40 p-2 md:p-3 shadow-2xl">

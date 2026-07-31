@@ -71,13 +71,13 @@ export default function Navbar() {
             </div>
           </Link>
 
-          <div className="hidden lg:flex items-center space-x-4 xl:space-x-6">
+          <div className="hidden xl:flex items-center space-x-3 2xl:space-x-5">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(event) => handleNavClick(event, link.href)}
-                className="text-gray-600 hover:text-primary font-oswald font-medium text-sm uppercase tracking-widest transition-colors relative group whitespace-nowrap"
+                className="text-gray-600 hover:text-primary font-oswald font-medium text-xs 2xl:text-sm uppercase tracking-wider 2xl:tracking-widest transition-colors relative group whitespace-nowrap"
               >
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
@@ -85,7 +85,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="lg:hidden flex items-center gap-4">
+          <div className="xl:hidden flex items-center gap-4">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-900 hover:text-primary transition-colors"
@@ -104,7 +104,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
+            className="xl:hidden bg-white border-t border-gray-100 overflow-hidden"
           >
             <div className="px-4 pt-4 pb-8 space-y-4">
               {navLinks.map((link) => (

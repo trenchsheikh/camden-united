@@ -17,11 +17,11 @@ export default function SponsorsCarousel() {
           <div className="w-16 h-1.5 bg-primary mt-4" />
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16 lg:gap-20">
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-16 lg:gap-20">
           {sponsors.map((sponsor) => (
             <div
               key={sponsor.name}
-              className="flex items-center justify-center"
+              className="flex items-center justify-center max-w-[45%] sm:max-w-none"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -29,7 +29,7 @@ export default function SponsorsCarousel() {
                 alt={`${sponsor.name} logo`}
                 width={sponsor.width}
                 height={sponsor.height}
-                className={`object-contain w-auto ${sponsor.className}`}
+                className={`object-contain w-auto max-h-16 sm:max-h-none ${sponsor.className}`}
                 draggable={false}
               />
             </div>
