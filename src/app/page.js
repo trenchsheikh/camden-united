@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import SponsorsCarousel from '@/components/SponsorsCarousel';
 import About from '@/components/About';
+import InMemory from '@/components/InMemory';
 import Teams from '@/components/Teams';
 import Media from '@/components/Media';
 import Partners, { CaseStudies } from '@/components/Partners';
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <SponsorsCarousel />
       <About />
+      <InMemory />
       <Teams />
       <Partners />
       <CaseStudies />
