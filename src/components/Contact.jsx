@@ -1,28 +1,20 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Phone } from 'lucide-react';
-import { scrollToHash } from '@/lib/scroll';
+import { Mail, Phone } from 'lucide-react';
 
 const contactInfo = [
-  {
-    icon: MapPin,
-    title: 'Visit Us',
-    details: ['30 Bertram St', 'London N19 5DQ, United Kingdom'],
-    delay: 0,
-    href: '#location',
-  },
   {
     icon: Phone,
     title: 'Call Us',
     details: ['+447429362957', 'Mon to Fri, 9AM-6PM'],
-    delay: 0.1,
+    delay: 0,
   },
   {
     icon: Mail,
     title: 'Email Us',
     details: ['admin@camdenunitedfc.com', "We'll respond shortly"],
-    delay: 0.2,
+    delay: 0.1,
   },
 ];
 
@@ -30,21 +22,20 @@ export default function Contact() {
   return (
     <section id="contact" className="py-24 bg-white relative">
       <div className="max-w-[1400px] mx-auto px-6">
-        
         <div className="text-center mb-16">
           <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-2">Get In Touch</h4>
           <h2 className="text-4xl md:text-6xl font-oswald font-black uppercase text-gray-900 leading-none mb-6">
             Contact <br /> The Club
           </h2>
-          <motion.div 
+          <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             className="w-24 h-1 bg-primary mx-auto"
           />
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {contactInfo.map((item, index) => (
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {contactInfo.map((item) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 20 }}
@@ -59,19 +50,7 @@ export default function Contact() {
               <h3 className="text-2xl font-oswald font-bold text-gray-900 uppercase mb-4">{item.title}</h3>
               <div className="space-y-1">
                 {item.details.map((detail, idx) =>
-                  item.href ? (
-                    <a
-                      key={idx}
-                      href={item.href}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        scrollToHash(item.href, 88);
-                      }}
-                      className="block text-gray-500 text-sm font-medium hover:text-primary transition-colors"
-                    >
-                      {detail}
-                    </a>
-                  ) : item.title === 'Email Us' && idx === 0 ? (
+                  item.title === 'Email Us' && idx === 0 ? (
                     <a
                       key={idx}
                       href={`mailto:${detail}`}
@@ -99,22 +78,22 @@ export default function Contact() {
         </div>
 
         <div className="mt-20 bg-primary py-16 px-6 text-center relative overflow-hidden rounded-3xl">
-             {/* Background decorative text */}
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl font-oswald font-black text-black/5 whitespace-nowrap z-0 pointer-events-none uppercase">
-                 Join The Club
-             </div>
-             
-             <div className="relative z-10">
-                <h3 className="text-3xl md:text-5xl font-oswald font-black uppercase text-white mb-8">Ready to Join Camden United?</h3>
-                <a
-                  href="mailto:admin@camdenunitedfc.com"
-                  className="inline-block bg-white text-primary font-oswald font-bold uppercase tracking-widest py-4 px-10 hover:bg-gray-900 hover:text-white transition-colors shadow-2xl"
-                >
-                    Get In Touch
-                </a>
-             </div>
-        </div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl font-oswald font-black text-black/5 whitespace-nowrap z-0 pointer-events-none uppercase">
+            Join The Club
+          </div>
 
+          <div className="relative z-10">
+            <h3 className="text-3xl md:text-5xl font-oswald font-black uppercase text-white mb-8">
+              Ready to Join Camden United?
+            </h3>
+            <a
+              href="mailto:admin@camdenunitedfc.com"
+              className="inline-block bg-white text-primary font-oswald font-bold uppercase tracking-widest py-4 px-10 hover:bg-gray-900 hover:text-white transition-colors shadow-2xl"
+            >
+              Get In Touch
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
