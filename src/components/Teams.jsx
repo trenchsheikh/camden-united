@@ -1,37 +1,33 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Users, Trophy, Star, ChevronRight, ArrowRight } from 'lucide-react';
-import clsx from 'clsx';
+import { ArrowRight } from 'lucide-react';
 import { scrollToHash } from '@/lib/scroll';
 
-const teams = [
-  {
-    title: 'Midweek Teams',
-    age: 'Ages 16 to 25',
-    description:
-      'Two midweek sides for young men navigating life after school and into adulthood through football, mentoring, and a trusted peer network.',
-    icon: Star,
-    color: 'text-yellow-600',
-    stat: '2 Teams',
-  },
+const squadPhotos = [
   {
     title: 'First Team',
-    age: 'Open Age · Saturday',
-    description:
-      'Our open age First Team competing regularly, keeping members connected through structured football and club life.',
-    icon: Trophy,
-    color: 'text-primary',
-    stat: 'Open Age',
+    src: '/first-team.jpg',
+    alt: 'Camden United First Team celebrating with the trophy',
+    caption: 'Open age Saturday side, competing for Camden United on and off the pitch.',
+    objectPosition: 'object-[center_30%]',
+    fit: 'object-cover',
+  },
+  {
+    title: 'Midweek Teams',
+    src: '/midweek.jpg',
+    alt: 'Camden United midweek teams group photo on the pitch',
+    caption: 'Ages 16 to 25, using football, mentoring, and peer support through the week.',
+    objectPosition: 'object-center',
+    fit: 'object-contain md:object-cover',
   },
   {
     title: 'Founding Members',
-    age: 'Ages 25+',
-    description:
-      'A side for founding members aged 25 and over, sustaining the relationships and leadership that built Camden United.',
-    icon: Users,
-    color: 'text-blue-600',
-    stat: '25+',
+    src: '/founding.png',
+    alt: 'Camden United founding members team photo on the pitch',
+    caption: 'Ages 25 and over, sustaining the relationships and leadership that built the club.',
+    objectPosition: 'object-center',
+    fit: 'object-contain md:object-cover',
   },
 ];
 
@@ -68,79 +64,39 @@ export default function Teams() {
           </a>
         </div>
 
-        <motion.figure
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
-          className="mb-14 md:mb-16"
-        >
-          <div className="relative w-full overflow-hidden border border-gray-300 bg-white p-2 md:p-3 shadow-sm">
-            <div className="relative aspect-[16/10] md:aspect-[21/9] w-full overflow-hidden bg-gray-100">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/first-team.jpg"
-                alt="Camden United First Team celebrating with the trophy"
-                className="absolute inset-0 h-full w-full object-cover object-[center_30%]"
-              />
-            </div>
-          </div>
-          <figcaption className="mt-4 flex flex-wrap items-end justify-between gap-3 border-b border-gray-200 pb-4">
-            <div>
-              <p className="text-primary font-oswald font-bold uppercase tracking-widest text-xs mb-1">
-                The Squad
-              </p>
-              <h3 className="text-2xl md:text-3xl font-oswald font-black uppercase text-gray-900 leading-none">
-                First Team
-              </h3>
-            </div>
-            <p className="text-sm text-gray-500 max-w-md md:text-right leading-relaxed">
-              Open age Saturday side, competing for Camden United on and off the pitch.
-            </p>
-          </figcaption>
-        </motion.figure>
-
-        <div className="grid lg:grid-cols-3 gap-8 mb-12">
-          {teams.map((team, index) => (
-            <motion.div
-              key={team.title}
-              initial={{ opacity: 0, y: 30 }}
+        <div className="space-y-10 md:space-y-12 mb-14 md:mb-16">
+          {squadPhotos.map((squad, index) => (
+            <motion.figure
+              key={squad.title}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.2, duration: 0.5 }}
-              className="group relative bg-white p-8 border-t-4 border-transparent hover:border-primary transition-all duration-300 hover:-translate-y-2 shadow-sm hover:shadow-xl"
+              transition={{ duration: 0.55, delay: index * 0.05 }}
             >
-              <div className="flex justify-between items-start mb-8">
-                <div className="bg-gray-50 p-4 rounded-lg group-hover:bg-primary/10 transition-colors">
-                  <team.icon className={clsx('w-8 h-8', team.color)} />
+              <div className="relative w-full overflow-hidden border border-gray-300 bg-white p-2 md:p-3 shadow-sm">
+                <div className="relative aspect-[16/10] md:aspect-[21/9] w-full overflow-hidden bg-gray-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={squad.src}
+                    alt={squad.alt}
+                    className={`absolute inset-0 h-full w-full ${squad.fit} ${squad.objectPosition}`}
+                  />
                 </div>
-                <span className="text-gray-400 font-oswald text-sm uppercase tracking-wider">
-                  {team.stat}
-                </span>
               </div>
-
-              <h3 className="text-2xl font-oswald font-bold text-gray-900 uppercase mb-2 group-hover:text-primary transition-colors">
-                {team.title}
-              </h3>
-              <p className="text-primary font-bold text-xs uppercase tracking-widest mb-4">
-                {team.age}
-              </p>
-
-              <p className="text-gray-500 text-sm leading-relaxed mb-8 border-b border-gray-100 pb-8">
-                {team.description}
-              </p>
-
-              <a
-                href="#contact"
-                onClick={(event) => {
-                  event.preventDefault();
-                  scrollToHash('#contact');
-                }}
-                className="inline-flex items-center gap-2 text-gray-900 font-bold uppercase text-xs tracking-widest group-hover:gap-3 transition-all"
-              >
-                Learn More <ChevronRight className="w-3 h-3 text-primary" />
-              </a>
-            </motion.div>
+              <figcaption className="mt-4 flex flex-wrap items-end justify-between gap-3 border-b border-gray-200 pb-4">
+                <div>
+                  <p className="text-primary font-oswald font-bold uppercase tracking-widest text-xs mb-1">
+                    The Squad
+                  </p>
+                  <h3 className="text-2xl md:text-3xl font-oswald font-black uppercase text-gray-900 leading-none">
+                    {squad.title}
+                  </h3>
+                </div>
+                <p className="text-sm text-gray-500 max-w-md md:text-right leading-relaxed">
+                  {squad.caption}
+                </p>
+              </figcaption>
+            </motion.figure>
           ))}
         </div>
 
