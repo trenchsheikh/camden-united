@@ -27,7 +27,8 @@ const squadPhotos = [
     alt: 'Camden United founding members team photo on the pitch',
     caption: 'Ages 25 and over, sustaining the relationships and leadership that built the club.',
     objectPosition: 'object-center',
-    fit: 'object-contain md:object-cover',
+    fit: 'object-contain',
+    compact: true,
   },
 ];
 
@@ -72,9 +73,16 @@ export default function Teams() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: index * 0.05 }}
+              className={squad.compact ? 'max-w-md md:max-w-lg' : undefined}
             >
               <div className="relative w-full overflow-hidden border border-gray-300 bg-white p-2 md:p-3 shadow-sm">
-                <div className="relative aspect-[16/10] md:aspect-[21/9] w-full overflow-hidden bg-gray-100">
+                <div
+                  className={`relative w-full overflow-hidden bg-gray-100 ${
+                    squad.compact
+                      ? 'aspect-[3/4]'
+                      : 'aspect-[16/10] md:aspect-[21/9]'
+                  }`}
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={squad.src}
