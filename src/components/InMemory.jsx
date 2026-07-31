@@ -86,25 +86,55 @@ export default function InMemory() {
             </a>
           </motion.div>
 
-          <motion.figure
+          <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="lg:col-span-5 space-y-4"
+            className="lg:col-span-5 space-y-8"
           >
-            <div className="overflow-hidden border border-white/15 bg-black/40 p-2 md:p-3 shadow-2xl">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/keir-starmer-letter.png"
-                alt="Letter of condolence from Keir Starmer MP to Camden United following the death of Abdulaziz Munye"
-                className="w-full h-auto object-contain max-h-[70vh]"
-              />
-            </div>
-            <figcaption className="text-xs font-oswald uppercase tracking-widest text-white/45">
-              Letter from Keir Starmer MP · 18 November 2022
-            </figcaption>
-          </motion.figure>
+            <figure className="space-y-4">
+              <div className="overflow-hidden border border-white/15 bg-black/40 p-2 md:p-3 shadow-2xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/abdul.PNG"
+                  alt="Portrait of Abdulaziz Munye, co founder of Camden United FC, smiling in a branded white hoodie"
+                  className="w-full h-auto object-cover aspect-[4/5]"
+                />
+              </div>
+              <figcaption className="text-xs font-oswald uppercase tracking-widest text-white/45">
+                Abdulaziz Munye · Co founder, Camden United FC
+              </figcaption>
+            </figure>
+
+            <figure className="space-y-3">
+              <div className="overflow-hidden border border-white/15 bg-black/40 p-2">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/abdul-team.png"
+                  alt="Camden United and Munye League players celebrating together on the pitch with trophies"
+                  className="w-full h-auto object-cover aspect-[16/10]"
+                />
+              </div>
+              <figcaption className="text-xs font-oswald uppercase tracking-widest text-white/45">
+                The community he helped build
+              </figcaption>
+            </figure>
+
+            <figure className="space-y-3">
+              <div className="overflow-hidden border border-white/15 bg-black/40 p-2 max-w-sm">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/keir-starmer-letter.png"
+                  alt="Letter of condolence from Keir Starmer MP following the death of Abdulaziz Munye"
+                  className="w-full h-auto object-contain max-h-72 md:max-h-80"
+                />
+              </div>
+              <figcaption className="text-xs font-oswald uppercase tracking-widest text-white/45">
+                Letter from Keir Starmer MP · 18 November 2022
+              </figcaption>
+            </figure>
+          </motion.div>
         </div>
       </div>
     </section>

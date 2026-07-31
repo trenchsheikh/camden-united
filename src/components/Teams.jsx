@@ -149,7 +149,7 @@ export default function Teams() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="bg-gray-900 text-white px-8 py-10 md:px-12 md:py-12"
+          className="bg-gray-900 text-white px-8 py-10 md:px-12 md:py-14"
         >
           <p className="text-primary font-oswald font-bold uppercase tracking-widest text-sm mb-3">
             Beyond Our Squads
@@ -157,11 +157,34 @@ export default function Teams() {
           <h3 className="text-2xl md:text-3xl font-oswald font-black uppercase mb-4">
             The Munye League
           </h3>
-          <p className="text-white/80 max-w-3xl leading-relaxed">
-            Founded and run by Camden United, the Munye League connects young people across
-            eight Camden based clubs in the open age league and five organisations in the
-            16 to 18 programme: a trusted network of support and opportunity across the borough.
-          </p>
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+            <div className="space-y-5 text-white/80 leading-relaxed">
+              <p>
+                Founded and run by Camden United, the Munye League connects young people across
+                eight Camden based clubs in the open age league and five organisations in the
+                16 to 18 programme: a trusted network of support and opportunity across the borough.
+              </p>
+              <p>
+                Through the Munye League we use football to engage young men aged 16 to 18.
+                From that point we deliver workshops and mentorship sessions with them, building
+                belonging on the pitch and pathways off it.
+              </p>
+            </div>
+
+            <ul className="space-y-4">
+              {[
+                'Started it off ourselves',
+                'Became funded by GO! London',
+                'Camden Council part fund it and provide pitch space',
+                'Completely free, removing the financial barrier',
+              ].map((item) => (
+                <li key={item} className="flex gap-4 items-start border-t border-white/10 pt-4 first:border-0 first:pt-0">
+                  <span className="mt-1.5 h-2 w-2 shrink-0 bg-primary" />
+                  <span className="text-white font-medium leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </motion.div>
       </div>
     </section>

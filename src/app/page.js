@@ -16,10 +16,10 @@ export default function Home() {
       <Hero />
       <SponsorsCarousel />
       <About />
-      <InMemory />
       <Teams />
       <Partners />
       <CaseStudies />
+      <InMemory />
       <Media />
       <Contact />
       <Footer />
