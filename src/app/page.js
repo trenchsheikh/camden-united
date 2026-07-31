@@ -9,10 +9,12 @@ import Partners, { CaseStudies } from '@/components/Partners';
 import Location from '@/components/Location';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import HashScroll from '@/components/HashScroll';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
+      <HashScroll />
       <Navbar />
       <Hero />
       <SponsorsCarousel />

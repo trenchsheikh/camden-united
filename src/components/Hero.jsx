@@ -44,6 +44,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4"
           >
             <a
               href="#about"
@@ -55,6 +56,12 @@ export default function Hero() {
             >
               <span className="relative z-10">Read More</span>
               <div className="absolute inset-0 h-full w-full scale-0 rounded-full transition-all duration-300 group-hover:scale-100 group-hover:bg-gray-900/50" />
+            </a>
+            <a
+              href="/games"
+              className="inline-flex items-center justify-center px-8 py-3 md:px-10 md:py-4 bg-white text-gray-900 border-2 border-gray-900 font-oswald font-bold uppercase tracking-widest text-base md:text-lg rounded-full hover:bg-gray-900 hover:text-white transition-all"
+            >
+              Camden Games
             </a>
           </motion.div>
         </motion.div>

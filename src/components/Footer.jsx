@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { Instagram } from 'lucide-react';
 import { scrollToHash } from '@/lib/scroll';
 
@@ -11,25 +12,26 @@ const footerColumns = [
   {
     title: 'Club',
     links: [
-      { name: 'About', href: '#about' },
-      { name: 'Teams', href: '#teams' },
-      { name: 'Sponsors', href: '#sponsors' },
-      { name: 'In Memory', href: '#in-memory' },
+      { name: 'About', href: '/#about' },
+      { name: 'Teams', href: '/#teams' },
+      { name: 'Camden Games', href: '/games' },
+      { name: 'Sponsors', href: '/#sponsors' },
+      { name: 'In Memory', href: '/#in-memory' },
     ],
   },
   {
     title: 'Partners',
     links: [
-      { name: 'Partner With Us', href: '#partners' },
-      { name: 'Case Studies', href: '#case-studies' },
+      { name: 'Partner With Us', href: '/#partners' },
+      { name: 'Case Studies', href: '/#case-studies' },
     ],
   },
   {
     title: 'Connect',
     links: [
-      { name: 'Media', href: '#media' },
-      { name: 'Location', href: '#location' },
-      { name: 'Contact', href: '#contact' },
+      { name: 'Media', href: '/#media' },
+      { name: 'Location', href: '/#location' },
+      { name: 'Contact', href: '/#contact' },
       { name: 'Instagram', href: INSTAGRAM_URL, external: true },
     ],
   },
@@ -37,10 +39,25 @@ const footerColumns = [
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const handleNavClick = (event, href) => {
-    event.preventDefault();
-    scrollToHash(href, NAV_OFFSET);
+    if (href === '/games') return;
+
+    if (href === '/') {
+      event.preventDefault();
+      if (pathname === '/') scrollToHash('/', NAV_OFFSET);
+      else router.push('/');
+      return;
+    }
+
+    if (href.startsWith('/#')) {
+      event.preventDefault();
+      const hash = `#${href.split('#')[1]}`;
+      if (pathname === '/') scrollToHash(hash, NAV_OFFSET);
+      else router.push(href);
+    }
   };
 
   return (
@@ -98,6 +115,13 @@ export default function Footer() {
                       >
                         {link.name}
                       </a>
+                    ) : link.href === '/games' ? (
+                      <Link
+                        href={link.href}
+                        className="text-gray-600 hover:text-primary transition-colors text-sm uppercase tracking-wide"
+                      >
+                        {link.name}
+                      </Link>
                     ) : (
                       <a
                         href={link.href}
