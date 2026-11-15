@@ -16,6 +16,7 @@ on:
   push:
     paths:
       - '.github/workflows/update-fixtures.yml'
+      - 'scripts/sync_fixtures.py'
 
 permissions:
   contents: write
