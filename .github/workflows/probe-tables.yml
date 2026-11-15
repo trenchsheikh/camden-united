@@ -11,35 +11,34 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Check league table pages
+      - name: Inspect active divisions for current season
         run: |
           python - <<'PY'
-          import requests
+          import requests, re
           from concurrent.futures import ThreadPoolExecutor
           urls={
-            'fa_tables': 'https://fulltime.thefa.com/tables.html?league=695549151&selectedSeason=224702165',
-            'fa_home': 'https://fulltime.thefa.com/index.html?league=695549151&selectedSeason=224702165',
-            'fa_midweek': 'https://fulltime.thefa.com/displayTeam.html?id=380596793',
-            'fa_ogs': 'https://fulltime.thefa.com/displayTeam.html?id=144179498',
-            'fa_div1': 'https://fulltime.thefa.com/index.html?league=695549151&selectedSeason=224702165&selectedDivision=436230581',
-            'fa_div3': 'https://fulltime.thefa.com/index.html?league=695549151&selectedSeason=224702165&selectedDivision=954226676',
-            'mitoo_table': 'https://mitoofootball.com/LeagueTab.cfm?DivisionID=64&LeagueCode=MDX2026&TblName=Standings',
-            'fa_middlesex': 'https://fulltime.thefa.com/index.html?league=4397699',
+            "midweek": "https://fulltime.thefa.com/displayTeam.html?id=380596793",
+            "ogs": "https://fulltime.thefa.com/displayTeam.html?id=144179498",
+            "current_index": "https://fulltime.thefa.com/index.html?league=695549151&selectedSeason=224702165",
+            "current_tables": "https://fulltime.thefa.com/table.html?league=695549151&selectedSeason=224702165",
+            "current_div1": "https://fulltime.thefa.com/index.html?league=695549151&selectedCompetition=0&selectedDivision=436230581&selectedFixtureGroupKey=1_311845301&selectedSeason=224702165",
+            "current_div3": "https://fulltime.thefa.com/index.html?league=695549151&selectedCompetition=0&selectedDivision=954226676&selectedFixtureGroupKey=1_860713087&selectedSeason=224702165",
           }
-          def check(item):
+          def run(item):
               name,url=item
               try:
-                  r=requests.get('https://r.jina.ai/'+url,timeout=35)
+                  r=requests.get("https://r.jina.ai/"+url,timeout=32,headers={"X-Return-Format":"markdown"})
                   body=r.text
-                  markers=['League Table','## League Table','Division 1','Division 3','selectedDivision','2026','Camden United','Just a moment']
-                  info={'name':name,'status':r.status_code,'length':len(body),'markers':[(x,body.find(x)) for x in markers if x in body]}
-                  at=body.find('## League Table')
-                  if at<0: at=body.find('League Table')
-                  info['sample']=repr(body[max(0,at-400):at+1800] if at>=0 else body[:450])
-                  return info
+                  output=[name+" status="+str(r.status_code)+" len="+str(len(body))]
+                  for key in ["selectedDivision","Division 1","Division 3","Division One","Division Three","divisionseason=", "## League Table"]:
+                      poss=[m.start() for m in list(re.finditer(re.escape(key),body,re.I))][:5]
+                      output.append(key+" "+str(poss))
+                      for x in poss[:2]:
+                          output.append(repr(body[max(0,x-200):x+320]))
+                  return "\n".join(output)
               except Exception as e:
-                  return {'name':name,'error':str(e)[:180]}
-          with ThreadPoolExecutor(max_workers=8) as pool:
-              for item in pool.map(check,urls.items()):
-                  print(item,flush=True)
+                  return name+" error "+str(e)
+          with ThreadPoolExecutor(max_workers=6) as pool:
+              for x in pool.map(run,urls.items()):
+                  print(x,flush=True)
           PY
