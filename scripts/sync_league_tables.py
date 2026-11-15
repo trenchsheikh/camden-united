@@ -23,7 +23,7 @@ TODAY = NOW.date().isoformat()
 FA_HOST = "https://fulltime.thefa.com"
 FA_LEAGUE = "695549151"
 FA_SEASON = "224702165"
-MITOO = "https://mitoofootball.com/LeagueTab.cfm?DivisionID=64&LeagueCode=MDX2026&TblName=Standings"
+MITOO = "https://mitoofootball.com/LeagueTab.cfm?TblName=Matches&DivisionID=64&LeagueCode=MDX2026"
 TEAMS = {
     "midweek": {
         "page": FA_HOST + "/displayTeam.html?id=380596793",
