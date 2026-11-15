@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T20:51:36.010019+00:00",
+  "updatedAt": "2026-11-15T21:02:23.069516+00:00",
   "lastSuccessfulSunday": null,
   "teams": {
     "first": {
@@ -204,6 +204,6 @@
     }
   },
   "errors": {
-    "first": "First Team (Mitoo): The provider is blocking automatic retrieval"
+    "first": "First Team standings: 502 Server Error: Bad Gateway for url: https://www.nonleaguematters.co.uk/divisions/62/"
   }
 }
