@@ -23,7 +23,10 @@ function LeagueTable({ id, data }) {
           <h2 className="text-2xl sm:text-3xl font-oswald font-black uppercase text-gray-900">{LABELS[id]}</h2>
           <p className="text-gray-500 text-sm mt-1">{data?.division || 'League standings'} · 2026/27 season</p>
         </div>
-        {updated && <span className="text-xs text-gray-500">Synced {updated} UK</span>}
+        <div className="text-xs text-gray-500 text-right">
+          {data?.sourceUpdatedAt && <p>League updated {new Date(data.sourceUpdatedAt + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</p>}
+          {updated && <p>Synced {updated} UK</p>}
+        </div>
       </div>
       {standings.length ? (
         <div className="overflow-x-auto border border-gray-200 rounded-lg">
@@ -71,12 +74,21 @@ function LeagueTable({ id, data }) {
           <p className="text-sm max-w-xl">The latest table can be viewed at the league's website using the link below.</p>
         </div>
       )}
-      {data?.source && (
-        <a href={data.source} target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-primary hover:text-gray-900 text-sm font-medium mt-4 underline underline-offset-4">
-          View official league table <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-        </a>
-      )}
+      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+        {data?.source && (
+          <a href={data.source} target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-primary hover:text-gray-900 text-sm font-medium underline underline-offset-4">
+            {id === 'first' ? 'Standings source: NonLeagueMatters' : 'View official league table'}
+            <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+          </a>
+        )}
+        {data?.officialSource && (
+          <a href={data.officialSource} target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-gray-600 hover:text-primary text-sm underline underline-offset-4">
+            Official Mitoo league table <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+          </a>
+        )}
+      </div>
     </section>
   );
 }
