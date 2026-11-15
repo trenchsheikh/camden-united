@@ -1,0 +1,57 @@
+name: Keep Camden Club Crest Icons Updated
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/cu-logo.png'
+      - 'scripts/generate_brand_icons.py'
+      - '.github/workflows/brand-icons.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: camden-brand-icons
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image generator
+        run: pip install 'pillow==11.3.0'
+      - name: Generate favicon and touch icons
+        run: python scripts/generate_brand_icons.py
+      - name: Check icon formats
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          for path in ('src/app/favicon.ico', 'src/app/icon.png', 'src/app/apple-icon.png'):
+              with Image.open(path) as img:
+                  img.verify()
+              with Image.open(path) as img:
+                  print(path, img.format, img.size)
+          PY
+      - name: Commit generated icons if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/app/favicon.ico src/app/icon.png src/app/apple-icon.png
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: refresh Camden crest browser icons"
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
+          else
+            echo "Crest icons already up to date"
+          fi
