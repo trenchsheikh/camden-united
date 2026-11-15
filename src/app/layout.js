@@ -16,9 +16,8 @@ const roboto = Roboto({
 export const metadata = {
   title: "Camden United FC",
   description: "United in Passion. Driven by Excellence.",
-  icons: {
-    icon: '/cu-logo.png',
-  },
+  // App Router's favicon.ico, icon.png and apple-icon.png provide the
+  // correctly sized club crest to browsers and mobile home screens.
 };
 
 export default function RootLayout({ children }) {
