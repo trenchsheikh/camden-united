@@ -18,6 +18,7 @@ const TEAM_NAMES = {
 
 function Match({ game }) {
   const isCamden = (name) => /camden (?:& islington |and islington )?united/i.test(name);
+  const ground = ['midweek', 'ogs'].includes(game.team) ? 'Market Road Football Pitches' : game.ground;
   return (
     <li className="py-5 sm:py-6 grid grid-cols-1 sm:grid-cols-[135px_1fr_auto] items-start sm:items-center gap-3 sm:gap-6">
       <div className="flex sm:flex-col items-center sm:items-start gap-2 sm:gap-1">
@@ -36,9 +37,9 @@ function Match({ game }) {
           <span className={isCamden(game.away) ? 'text-primary' : 'text-gray-900'}>{game.away}</span>
         </p>
         <p className="text-xs uppercase text-gray-400 tracking-wider mt-1">{game.competition || 'Fixture'}</p>
-        {game.ground && (
+        {ground && (
           <p className="text-sm text-gray-500 mt-1 flex items-center gap-1">
-            <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden="true" /> {game.ground}
+            <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden="true" /> {ground}
           </p>
         )}
       </div>
