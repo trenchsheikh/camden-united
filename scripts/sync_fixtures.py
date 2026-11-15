@@ -22,8 +22,9 @@ LONDON = ZoneInfo("Europe/London")
 FA = "https://fulltime.thefa.com"
 MI = "https://mitoofootball.com/TeamHistAll.cfm?CI=68&TblName=Matches&LeagueCode=MDX2026&DivisionID=64"
 SOURCES = {
-    "first": [MI],
+    "first": [MI, FA + "/displayTeam.html?id=466252767"],
     "midweek": [
+        FA + "/displayTeam.html?id=380596793",
         FA + "/fixtures.html?" + urlencode({
             "selectedSeason": "224702165", "selectedFixtureGroupKey": "",
             "selectedDateCode": "all", "selectedClub": "652338347",
@@ -33,9 +34,9 @@ SOURCES = {
             "previousSelectedFixtureGroupKey": "",
             "previousSelectedClub": "652338347", "itemsPerPage": "25",
         }),
-        FA + "/displayTeam.html?id=380596793",
     ],
     "ogs": [
+        FA + "/displayTeam.html?id=144179498",
         FA + "/fixtures.html?" + urlencode({
             "selectedSeason": "224702165", "selectedFixtureGroupKey": "",
             "selectedDateCode": "all", "selectedClub": "652338347",
@@ -45,7 +46,6 @@ SOURCES = {
             "previousSelectedFixtureGroupKey": "",
             "previousSelectedClub": "652338347", "itemsPerPage": "25",
         }),
-        FA + "/displayTeam.html?id=144179498",
     ],
 }
 LABELS = {"first": "Camden United", "midweek": "Camden United", "ogs": "Camden United OG's"}
@@ -56,6 +56,7 @@ COMP_RE = re.compile(r"^(?:Cup|PREM|DIV\d+|D\d+|CC|League|Friendly|County Cup)$"
 NAME_RE = {
     "midweek": re.compile(r"^Camden United(?: FC Midweek)?$", re.I),
     "ogs": re.compile(r"^Camden United OG['’]s$", re.I),
+    "first": re.compile(r"^Camden United(?: FC First)?$", re.I),
 }
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 NOW = datetime.now(LONDON)
@@ -64,11 +65,32 @@ SUNDAY_KEY = TODAY.isoformat()
 
 
 def fetch(url):
-    result = requests.get(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "Accept-Language": "en-GB,en;q=0.9"}, timeout=25)
-    result.raise_for_status()
-    if len(result.content) < 900:
+    """Fetch public HTML or a readable public-page representation.
+
+    FA Full-Time returns 403 from hosted runners. The public text reader can
+    retrieve its publicly listed fixtures without credentials. Only trusted
+    fixed source URLs are passed to it.
+    """
+    response = requests.get(url, headers={
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-GB,en;q=0.9",
+    }, timeout=25)
+    if response.status_code == 403:
+        reader = "https://r.jina.ai/" + url
+        response = requests.get(reader, headers={
+            "User-Agent": USER_AGENT, "Accept": "text/plain"
+        }, timeout=35)
+        response.raise_for_status()
+        content = response.text
+        if "Upcoming Fixtures" not in content or "Just a moment" in content[:400]:
+            raise ValueError("Public text reader did not expose a fixture table")
+        return content
+
+    response.raise_for_status()
+    if len(response.content) < 900:
         raise ValueError("Response too short to contain verified fixtures")
-    soup = BeautifulSoup(result.text, "html.parser")
+    soup = BeautifulSoup(response.text, "html.parser")
     text = soup.get_text(" ", strip=True).lower()
     if not soup.find("table") or any(block in text[:400] for block in ["access denied", "captcha", "enable javascript"]):
         raise ValueError("No usable HTML fixture table found")
@@ -179,6 +201,68 @@ def unique(items):
     return sorted(deduped.values(), key=lambda x: (x["dateISO"], x.get("kickoff") or "99:99", x["id"]))
 
 
+def markdown_team_name(cell):
+    """FA Full-Time renders team names as links in the public reader."""
+    match = re.search(r"\[([^\]]+)\]\(https://fulltime\.thefa\.com/displayFixture\.html", cell)
+    if match:
+        return match.group(1).strip()
+    return re.sub(r"\s+", " ", re.sub(r"!\[[^\]]*\]\([^)]+\)", "", cell)).strip()
+
+
+def parse_fa_markdown(body, team):
+    """Parse only the Upcoming Fixtures table from the reader's markdown.
+
+    This intentionally avoids results, team-season stats, and other teams.
+    """
+    start = body.find("## Upcoming Fixtures")
+    if start < 0:
+        start = body.find("\nUpcoming Fixtures")
+    if start < 0:
+        raise ValueError("Missing upcoming fixtures section")
+    end = body.find("## Team Season", start)
+    section = body[start:end if end > start else len(body)]
+    matches = []
+    for line in section.splitlines():
+        if not line.strip().startswith("|"):
+            continue
+        cells = [part.strip() for part in line.strip().strip("|").split("|")]
+        if len(cells) < 8 or not any(value.upper() == "VS" for value in cells):
+            continue
+        date_match = DATE_RE.search(cells[1])
+        if not date_match:
+            continue
+        try:
+            match_date = parse_day(date_match.group(1))
+        except ValueError:
+            continue
+        if match_date < TODAY:
+            continue
+        home, away = markdown_team_name(cells[2]), markdown_team_name(cells[6])
+        if not (is_team(team, home) ^ is_team(team, away)):
+            continue
+        time_raw = date_match.group(2)
+        try:
+            kickoff = datetime.strptime(time_raw, "%H:%M").strftime("%-I:%M %p") if time_raw else None
+        except ValueError:
+            kickoff = None
+        match = {
+            "id": f"{team}-{match_date.isoformat()}-{slug(home)}-{slug(away)}",
+            "team": team,
+            "dateISO": match_date.isoformat(),
+            "date": f"{match_date:%A}, {match_date.day} {match_date:%B %Y}",
+            "home": home, "away": away, "kickoff": kickoff,
+            "venue": "Home" if is_team(team, home) else "Away",
+            "competition": normalise_competition(cells[0]),
+            "played": False,
+        }
+        if team in ("midweek", "ogs"):
+            match["ground"] = "Market Road Football Pitches"
+        elif cells[7]:
+            match["ground"] = cells[7]
+        matches.append(match)
+    return unique(matches)
+
+
 def parse_mitoo(soup):
     """Conservative public-table parser. Never infer home/away from ambiguous text."""
     matches = []
@@ -238,7 +322,8 @@ def main():
             try:
                 soup = fetch(url)
                 responses += 1
-                new_matches = parse_mitoo(soup) if team == "first" else parse_fa(soup, team)
+                new_matches = (parse_fa_markdown(soup, team) if isinstance(soup, str)
+                               else parse_mitoo(soup) if team == "first" else parse_fa(soup, team))
                 candidates.extend(new_matches)
                 if candidates:
                     break
