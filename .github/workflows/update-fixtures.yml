@@ -1,0 +1,67 @@
+name: Update Camden United Fixtures
+
+on:
+  # Local London time is observed automatically across GMT/BST.
+  schedule:
+    - cron: '0 20 * * 0'
+      timezone: 'Europe/London'
+    - cron: '0 21 * * 0'
+      timezone: 'Europe/London'
+    - cron: '0 22 * * 0'
+      timezone: 'Europe/London'
+    - cron: '0 23 * * 0'
+      timezone: 'Europe/London'
+  # Allows a controlled Sunday run and runs once when this workflow is installed.
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/update-fixtures.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: camden-fixtures-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install parser
+        run: pip install -r requirements-fixtures.txt
+
+      - name: Read public fixtures (Sunday from 8pm UK only)
+        id: sync
+        continue-on-error: true
+        run: python scripts/sync_fixtures.py
+
+      - name: Commit only validated changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/fixtures-synced.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: refresh Camden United fixtures"
+            git push
+          else
+            echo "No fixture changes"
+          fi
+
+      - name: Mark partial or failed sync for retry on Sunday
+        if: steps.sync.outcome == 'failure'
+        run: |
+          echo "::error::One or more league sources could not be verified. Existing fixtures were kept; the next Sunday checkpoint will retry."
+          exit 1
