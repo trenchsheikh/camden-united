@@ -11,7 +11,7 @@ on:
       timezone: 'Europe/London'
     - cron: '0 23 * * 0'
       timezone: 'Europe/London'
-  # Allows a controlled Sunday run and runs once when this workflow is installed.
+  # Manual trigger for diagnostics; the Python script still enforces Sunday.
   workflow_dispatch:
   push:
     paths:
@@ -43,30 +43,6 @@ jobs:
 
       - name: Install parser
         run: pip install -r requirements-fixtures.txt
-
-      - name: Check alternative public source accessibility
-        if: github.event_name == 'push'
-        run: |
-          python - <<'PY'
-          import requests
-          urls = {
-            'jina_ogs': 'https://r.jina.ai/https://fulltime.thefa.com/displayTeam.html?id=144179498',
-            'jina_midweek': 'https://r.jina.ai/https://fulltime.thefa.com/displayTeam.html?id=380596793',
-            'jina_first': 'https://r.jina.ai/https://mitoofootball.com/TeamHistAll.cfm?CI=68&TblName=Matches&LeagueCode=MDX2026&DivisionID=64',
-            'bing_rss': 'https://www.bing.com/search?format=rss&q=site%3Afulltime.thefa.com%2FdisplayTeam.html+%22Camden+United%22+2026',
-          }
-          for name, url in urls.items():
-              try:
-                  r = requests.get(url, timeout=18, headers={'User-Agent':'Mozilla/5.0'})
-                  body = r.text
-                  print(name, r.status_code, len(body), body[:120].replace('\\n',' '))
-                  if name in ('jina_ogs', 'jina_midweek') and r.ok:
-                      at=body.find('Upcoming Fixtures')
-                      if at < 0: at=body.find('Upcoming fixtures')
-                      print(name, 'upcoming_at', at, 'sample:', repr(body[at:at+4200] if at>=0 else body[:1000]))
-              except Exception as e:
-                  print(name, type(e).__name__, str(e)[:160])
-          PY
 
       - name: Read public fixtures (Sunday from 8pm UK only)
         id: sync
