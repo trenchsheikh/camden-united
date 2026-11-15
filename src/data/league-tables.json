@@ -1,5 +1,5 @@
 {
-  "updatedAt": null,
+  "updatedAt": "2026-11-15T20:49:02.341356+00:00",
   "lastSuccessfulSunday": null,
   "teams": {
     "first": {
@@ -21,5 +21,9 @@
       "updatedAt": null
     }
   },
-  "errors": {}
+  "errors": {
+    "first": "First Team (Mitoo): 401 Client Error: Unauthorized for url: https://r.jina.ai/https://mitoofootball.com/LeagueTab.cfm?DivisionID=64&LeagueCode=MDX2026&TblName=Standings",
+    "midweek": "midweek: 401 Client Error: Unauthorized for url: https://r.jina.ai/https://fulltime.thefa.com/displayTeam.html?id=380596793",
+    "ogs": "ogs: 401 Client Error: Unauthorized for url: https://r.jina.ai/https://fulltime.thefa.com/displayTeam.html?id=144179498"
+  }
 }
