@@ -8,6 +8,7 @@ all match expectations. On a source failure, retain previously verified data.
 import json
 import re
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
@@ -142,15 +143,85 @@ def parse_standings(markdown, team):
     return rows
 
 
+def validate_first_team_rows(rows):
+    if not 10 <= len(rows) <= 24:
+        raise ValueError("Unexpected number of Premier Division clubs")
+    if [row["position"] for row in rows] != list(range(1, len(rows) + 1)):
+        raise ValueError("Table positions are incomplete or unsorted")
+    camden = [row for row in rows if row["name"].casefold() == "camden united"]
+    if len(camden) != 1 or camden[0]["played"] < 1:
+        raise ValueError("The current First Team record was not found")
+    for row in rows:
+        if row["played"] != row["won"] + row["drawn"] + row["lost"]:
+            raise ValueError("Premier Division record failed played-match validation")
+
+
+def parse_first_team_markdown(body):
+    """Fallback for the public source's indexed text representation."""
+    if not re.search(r"2026\s*-\s*2027", body):
+        raise ValueError("Cannot confirm the 2026/27 season")
+    m = re.search(
+        r"Division Last Updated:\s*(?:\d{1,2}:\d{2},?\s*)?"
+        r"(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+"
+        r"(\d{1,2})(?:st|nd|rd|th)\s+([A-Za-z]+)\s+(20\d{2})", body, re.I
+    )
+    if not m:
+        raise ValueError("Cannot verify indexed standings update date")
+    published = datetime.strptime(f"{m.group(1)} {m.group(2)} {m.group(3)}", "%d %B %Y").date()
+    if not -2 <= (NOW.date() - published).days <= 90:
+        raise ValueError("Indexed standings snapshot is too old")
+    start = body.find("## League Table")
+    end = body.find("## Results", start)
+    if start < 0:
+        raise ValueError("Indexed table is missing")
+    table_text = body[start:end if end > start else len(body)]
+    rows = []
+    for line in table_text.splitlines():
+        if not line.strip().startswith("|"):
+            continue
+        cells = [value.strip() for value in line.strip().strip("|").split("|")]
+        if len(cells) != 20 or not cells[0].isdigit():
+            continue
+        row = {
+            "position": int(cells[0]), "name": cells[1],
+            "played": int(cells[2]), "won": int(cells[3]),
+            "drawn": int(cells[4]), "lost": int(cells[5]),
+            "goalDifference": int(cells[18].replace("+", "")),
+            "points": int(cells[19]),
+        }
+        rows.append(row)
+    validate_first_team_rows(rows)
+    return rows, published.isoformat()
+
+
 def parse_first_team_table():
     """Read the current 2026/27 Premier Division standings from NonLeagueMatters.
 
     Its source includes the most recent results and an actual populated league
     table. Do not use the FA's all-zero placeholder or an older season.
     """
-    response = requests.get(NLM, timeout=30, headers={"User-Agent": UA, "Accept": "text/html"})
-    response.raise_for_status()
-    soup = BeautifulSoup(response.text, "html.parser")
+    # This public source occasionally responds 502 from GitHub's network.
+    # Try both host variants and finally its indexed text representation.
+    body = None
+    for candidate in (NLM, NLM.replace("www.", ""), NLM):
+        try:
+            response = requests.get(candidate, timeout=23, headers={
+                "User-Agent": UA, "Accept": "text/html,application/xhtml+xml;q=0.9"
+            })
+            response.raise_for_status()
+            if "Camden United" in response.text and "Division Last Updated" in response.text:
+                body = response.text
+                break
+        except requests.RequestException:
+            time.sleep(1)
+
+    if body is None:
+        reader = requests.get("https://r.jina.ai/" + NLM, timeout=30)
+        reader.raise_for_status()
+        if "Division Last Updated" not in reader.text:
+            raise ValueError("Current Premier Division standings source unavailable")
+        return parse_first_team_markdown(reader.text)
+    soup = BeautifulSoup(body, "html.parser")
     title = soup.title.get_text(" ", strip=True) if soup.title else ""
     if "Middlesex County League Premier Division" not in title:
         raise ValueError("Unexpected Premier Division source page")
@@ -203,13 +274,7 @@ def parse_first_team_table():
         if row["played"] != row["won"] + row["drawn"] + row["lost"]:
             raise ValueError("Premier Division record failed played-match validation")
         rows.append(row)
-    if not 10 <= len(rows) <= 24:
-        raise ValueError("Unexpected number of Premier Division clubs")
-    if [row["position"] for row in rows] != list(range(1, len(rows) + 1)):
-        raise ValueError("Table positions are incomplete or unsorted")
-    camden = [row for row in rows if row["name"].casefold() == "camden united"]
-    if len(camden) != 1 or camden[0]["played"] < 1:
-        raise ValueError("The current First Team record was not found")
+    validate_first_team_rows(rows)
     return rows, published_day.isoformat()
 
 
