@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T20:49:02.341356+00:00",
+  "updatedAt": "2026-11-15T20:51:36.010019+00:00",
   "lastSuccessfulSunday": null,
   "teams": {
     "first": {
@@ -10,20 +10,200 @@
     },
     "midweek": {
       "division": "Division 1",
-      "source": "https://fulltime.thefa.com/displayTeam.html?id=380596793",
-      "rows": [],
-      "updatedAt": null
+      "source": "https://fulltime.thefa.com/index.html?league=695549151&selectedSeason=224702165&selectedDivision=436230581&selectedCompetition=0&selectedFixtureGroupKey=1_746419882",
+      "rows": [
+        {
+          "position": 1,
+          "name": "Spicegun 3rds",
+          "played": 6,
+          "won": 4,
+          "drawn": 1,
+          "lost": 1,
+          "goalDifference": 7,
+          "points": 13
+        },
+        {
+          "position": 2,
+          "name": "Aloysius",
+          "played": 5,
+          "won": 3,
+          "drawn": 1,
+          "lost": 1,
+          "goalDifference": 4,
+          "points": 10
+        },
+        {
+          "position": 3,
+          "name": "Camden United",
+          "played": 6,
+          "won": 3,
+          "drawn": 1,
+          "lost": 2,
+          "goalDifference": -1,
+          "points": 10
+        },
+        {
+          "position": 4,
+          "name": "Spartak London Whites",
+          "played": 6,
+          "won": 3,
+          "drawn": 0,
+          "lost": 3,
+          "goalDifference": 3,
+          "points": 9
+        },
+        {
+          "position": 5,
+          "name": "Hackney Galacticos",
+          "played": 6,
+          "won": 3,
+          "drawn": 0,
+          "lost": 3,
+          "goalDifference": -2,
+          "points": 9
+        },
+        {
+          "position": 6,
+          "name": "The Cannon",
+          "played": 5,
+          "won": 2,
+          "drawn": 2,
+          "lost": 1,
+          "goalDifference": 4,
+          "points": 8
+        },
+        {
+          "position": 7,
+          "name": "Karakocan",
+          "played": 6,
+          "won": 2,
+          "drawn": 1,
+          "lost": 3,
+          "goalDifference": 0,
+          "points": 7
+        },
+        {
+          "position": 8,
+          "name": "St. Johns Deaf",
+          "played": 5,
+          "won": 1,
+          "drawn": 0,
+          "lost": 4,
+          "goalDifference": -5,
+          "points": 3
+        },
+        {
+          "position": 9,
+          "name": "Nawfside F.C Northside Athletic FC",
+          "played": 5,
+          "won": 1,
+          "drawn": 0,
+          "lost": 4,
+          "goalDifference": -10,
+          "points": 3
+        }
+      ],
+      "updatedAt": "2026-11-15T20:51:36.010019+00:00"
     },
     "ogs": {
       "division": "Division 3",
-      "source": "https://fulltime.thefa.com/displayTeam.html?id=144179498",
-      "rows": [],
-      "updatedAt": null
+      "source": "https://fulltime.thefa.com/index.html?league=695549151&selectedSeason=224702165&selectedDivision=954226676&selectedCompetition=0&selectedFixtureGroupKey=1_35824601",
+      "rows": [
+        {
+          "position": 1,
+          "name": "Camden United OG's",
+          "played": 5,
+          "won": 4,
+          "drawn": 1,
+          "lost": 0,
+          "goalDifference": 16,
+          "points": 13
+        },
+        {
+          "position": 2,
+          "name": "Fullback",
+          "played": 7,
+          "won": 3,
+          "drawn": 2,
+          "lost": 2,
+          "goalDifference": 6,
+          "points": 11
+        },
+        {
+          "position": 3,
+          "name": "Barrilete Cosmico",
+          "played": 7,
+          "won": 3,
+          "drawn": 2,
+          "lost": 2,
+          "goalDifference": 4,
+          "points": 11
+        },
+        {
+          "position": 4,
+          "name": "London Internationale",
+          "played": 6,
+          "won": 3,
+          "drawn": 0,
+          "lost": 3,
+          "goalDifference": -4,
+          "points": 9
+        },
+        {
+          "position": 5,
+          "name": "Barnet Deaf",
+          "played": 5,
+          "won": 2,
+          "drawn": 1,
+          "lost": 2,
+          "goalDifference": -2,
+          "points": 7
+        },
+        {
+          "position": 6,
+          "name": "Finsbury Park Mosque",
+          "played": 6,
+          "won": 2,
+          "drawn": 0,
+          "lost": 4,
+          "goalDifference": -9,
+          "points": 6
+        },
+        {
+          "position": 7,
+          "name": "Regent Legend",
+          "played": 3,
+          "won": 1,
+          "drawn": 0,
+          "lost": 2,
+          "goalDifference": 0,
+          "points": 3
+        },
+        {
+          "position": 8,
+          "name": "Slaughter & May",
+          "played": 5,
+          "won": 1,
+          "drawn": 0,
+          "lost": 4,
+          "goalDifference": -11,
+          "points": 3
+        },
+        {
+          "position": 9,
+          "name": "Jubba",
+          "played": 0,
+          "won": 0,
+          "drawn": 0,
+          "lost": 0,
+          "goalDifference": 0,
+          "points": 0
+        }
+      ],
+      "updatedAt": "2026-11-15T20:51:36.010019+00:00"
     }
   },
   "errors": {
-    "first": "First Team (Mitoo): 401 Client Error: Unauthorized for url: https://r.jina.ai/https://mitoofootball.com/LeagueTab.cfm?DivisionID=64&LeagueCode=MDX2026&TblName=Standings",
-    "midweek": "midweek: 401 Client Error: Unauthorized for url: https://r.jina.ai/https://fulltime.thefa.com/displayTeam.html?id=380596793",
-    "ogs": "ogs: 401 Client Error: Unauthorized for url: https://r.jina.ai/https://fulltime.thefa.com/displayTeam.html?id=144179498"
+    "first": "First Team (Mitoo): The provider is blocking automatic retrieval"
   }
 }
