@@ -81,12 +81,15 @@ export default function Navbar() {
             onClick={(event) => handleNavClick(event, '/')}
             className="flex items-center gap-3 group"
           >
-            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-gray-200 bg-black group-hover:border-primary transition-colors">
+            <div className="relative h-12 w-12 sm:h-14 sm:w-14 shrink-0 flex items-center justify-center overflow-hidden" aria-hidden="true">
+              {/* Keep the full club crest visible instead of zooming/cropping it. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/cu-logo.png"
-                alt="Camden United Logo"
-                className="absolute inset-0 h-full w-full object-cover object-center scale-[1.22]"
+                alt=""
+                width="56"
+                height="56"
+                className="block h-full w-full object-contain object-center"
               />
             </div>
             <div className="flex flex-col">
