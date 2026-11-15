@@ -85,7 +85,7 @@ export default function Navbar() {
               {/* Keep the full club crest visible instead of zooming/cropping it. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/cu-logo.png"
+                src="/icon.png"
                 alt=""
                 width="56"
                 height="56"
