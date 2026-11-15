@@ -1,10 +1,14 @@
 {
-  "updatedAt": null,
+  "updatedAt": "2026-11-15T20:27:50.251859+00:00",
   "lastSuccessfulSunday": null,
   "teams": {
     "first": [],
     "midweek": [],
     "ogs": []
   },
-  "errors": {}
+  "errors": {
+    "first": "403 Client Error: Forbidden for url: https://mitoofootball.com/TeamHistAll.cfm?CI=68&TblName=Matches&LeagueCode=MDX2026&DivisionID=64",
+    "midweek": "403 Client Error: Forbidden for url: https://fulltime.thefa.com/fixtures.html?selectedSeason=224702165&selectedFixtureGroupKey=&selectedDateCode=all&selectedClub=652338347&selected; 403 Client Error: Forbidden for url: https://fulltime.thefa.com/displayTeam.html?id=380596793",
+    "ogs": "403 Client Error: Forbidden for url: https://fulltime.thefa.com/fixtures.html?selectedSeason=224702165&selectedFixtureGroupKey=&selectedDateCode=all&selectedClub=652338347&selected; 403 Client Error: Forbidden for url: https://fulltime.thefa.com/displayTeam.html?id=144179498"
+  }
 }
