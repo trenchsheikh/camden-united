@@ -73,6 +73,13 @@ export default function GamesPage() {
       </section>
       <section className="py-14 md:py-20">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="mb-8 flex flex-wrap items-center gap-3">
+            <Link href="/games/tables" className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-white font-oswald font-bold uppercase tracking-wide hover:bg-gray-900 transition-colors">
+              Live League Tables
+              <span aria-hidden="true">→</span>
+            </Link>
+            <span className="text-sm text-gray-500">View standings for all three Camden teams</span>
+          </div>
           <FixturesBoard gamesByTeam={gamesByTeam} sourceUrls={sourceUrls} updatedAt={synced.updatedAt} />
           <div className="mt-12 border-t border-gray-200 pt-8">
             <Link href="/" className="inline-flex items-center gap-2 bg-primary text-white font-oswald font-bold uppercase tracking-widest py-3 px-6 hover:bg-gray-900 transition-colors">
