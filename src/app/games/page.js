@@ -4,9 +4,12 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { fixtures, MITOO_SOURCE_URL } from '@/data/fixtures';
 
+// Keep date-based upcoming/pending sections current without a rebuild.
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Camden Games | Camden United FC',
-  description: 'Fixtures and results for Camden United FC in the Middlesex County Premier Division.',
+  description: 'Camden United FC fixtures in the Premier Division and Middlesex County FA Premier Cup.',
 };
 
 function ResultBadge({ result, played }) {
@@ -56,7 +59,9 @@ function FixtureRow({ game }) {
           <p className="text-xs font-oswald uppercase tracking-widest text-primary">
             {game.venue}
           </p>
-          <p className="text-sm text-gray-500">{game.date}</p>
+          <p className="text-sm text-gray-500">
+            {game.date}{game.kickoff && <span> · {game.kickoff}</span>}
+          </p>
         </div>
       </div>
 
@@ -71,6 +76,7 @@ function FixtureRow({ game }) {
           </span>
         </p>
         <p className="text-xs uppercase tracking-wider text-gray-400 mt-1">{game.competition}</p>
+        {game.ground && <p className="text-sm text-gray-500 mt-1">{game.ground}</p>}
       </div>
 
       <div className="sm:text-right">
@@ -81,7 +87,9 @@ function FixtureRow({ game }) {
 }
 
 export default function GamesPage() {
-  const upcoming = fixtures.filter((game) => !game.played);
+  const todayInLondon = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/London' });
+  const upcoming = fixtures.filter((game) => !game.played && game.dateISO >= todayInLondon);
+  const awaitingResults = fixtures.filter((game) => !game.played && game.dateISO < todayInLondon);
   const results = fixtures.filter((game) => game.played);
 
   return (
@@ -106,7 +114,7 @@ export default function GamesPage() {
           </h1>
           <div className="w-16 h-1.5 bg-primary mb-6" />
           <p className="text-gray-600 max-w-2xl leading-relaxed">
-            Fixtures and results for Camden United in the Premier Division.
+            Upcoming Premier Division and Middlesex County FA Premier Cup fixtures for Camden United.
           </p>
         </div>
       </section>
@@ -121,6 +129,22 @@ export default function GamesPage() {
                 </h2>
                 <ul className="divide-y divide-gray-200 border-y border-gray-200">
                   {upcoming.map((game) => (
+                    <FixtureRow key={game.id} game={game} />
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {awaitingResults.length > 0 && (
+              <div>
+                <h2 className="text-2xl md:text-3xl font-oswald font-black uppercase text-gray-900 mb-2">
+                  Awaiting Results
+                </h2>
+                <p className="text-sm text-gray-500 mb-6">
+                  These matches have passed, but no final score has been confirmed yet.
+                </p>
+                <ul className="divide-y divide-gray-200 border-y border-gray-200">
+                  {awaitingResults.map((game) => (
                     <FixtureRow key={game.id} game={game} />
                   ))}
                 </ul>
