@@ -257,7 +257,7 @@ def parse_fa_markdown(body, team):
         }
         if team in ("midweek", "ogs"):
             match["ground"] = "Market Road Football Pitches"
-        elif cells[7]:
+        elif cells[7] and cells[7].casefold() not in (home.casefold(), away.casefold()):
             match["ground"] = cells[7]
         matches.append(match)
     return unique(matches)
