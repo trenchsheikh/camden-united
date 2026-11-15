@@ -67,12 +67,8 @@ function LeagueTable({ id, data }) {
       ) : (
         <div className="border border-gray-200 rounded-lg bg-gray-50 p-7 sm:p-9 text-gray-600">
           <Trophy className="w-6 h-6 text-primary mb-3" aria-hidden="true" />
-          <p className="font-oswald font-bold uppercase text-gray-900 mb-1">Table not yet available</p>
-          <p className="text-sm max-w-xl">
-            {id === 'first'
-              ? 'The league provider is blocking automated table retrieval. We will not show an outdated or unverified table.'
-              : 'The league standings could not yet be verified. Previously confirmed data will remain visible when available.'}
-          </p>
+          <p className="font-oswald font-bold uppercase text-gray-900 mb-1">League standings</p>
+          <p className="text-sm max-w-xl">The latest table can be viewed at the league's website using the link below.</p>
         </div>
       )}
       {data?.source && (
