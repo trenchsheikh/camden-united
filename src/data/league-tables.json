@@ -4,7 +4,7 @@
   "teams": {
     "first": {
       "division": "Premier Division",
-      "source": "https://mitoofootball.com/LeagueTab.cfm?DivisionID=64&LeagueCode=MDX2026&TblName=Standings",
+      "source": "https://mitoofootball.com/LeagueTab.cfm?TblName=Matches&DivisionID=64&LeagueCode=MDX2026",
       "rows": [],
       "updatedAt": null
     },
