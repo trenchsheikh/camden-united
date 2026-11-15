@@ -1,14 +1,104 @@
 {
-  "updatedAt": "2026-11-15T20:27:50.251859+00:00",
-  "lastSuccessfulSunday": null,
+  "updatedAt": "2026-11-15T20:38:38.126346+00:00",
+  "lastSuccessfulSunday": "2026-11-15",
   "teams": {
-    "first": [],
-    "midweek": [],
-    "ogs": []
+    "first": [
+      {
+        "id": "first-2026-11-17-london-samurai-rovers-first-camden-united",
+        "team": "first",
+        "dateISO": "2026-11-17",
+        "date": "Tuesday, 17 November 2026",
+        "home": "London Samurai Rovers First",
+        "away": "Camden United",
+        "kickoff": "7:45 PM",
+        "venue": "Away",
+        "competition": "CC Middlesex FA Cups Middlesex FA Premier Cup",
+        "played": false,
+        "ground": "London Samurai Rovers First"
+      }
+    ],
+    "midweek": [
+      {
+        "id": "midweek-2026-11-26-camden-united-winfield-eagles",
+        "team": "midweek",
+        "dateISO": "2026-11-26",
+        "date": "Thursday, 26 November 2026",
+        "home": "Camden United",
+        "away": "Winfield Eagles",
+        "kickoff": "8:00 PM",
+        "venue": "Home",
+        "competition": "Cup",
+        "played": false,
+        "ground": "Market Road Football Pitches"
+      },
+      {
+        "id": "midweek-2026-12-10-camden-united-karakocan",
+        "team": "midweek",
+        "dateISO": "2026-12-10",
+        "date": "Thursday, 10 December 2026",
+        "home": "Camden United",
+        "away": "Karakocan",
+        "kickoff": "8:00 PM",
+        "venue": "Home",
+        "competition": "Division 1",
+        "played": false,
+        "ground": "Market Road Football Pitches"
+      }
+    ],
+    "ogs": [
+      {
+        "id": "ogs-2026-11-19-regent-legend-camden-united-og-s",
+        "team": "ogs",
+        "dateISO": "2026-11-19",
+        "date": "Thursday, 19 November 2026",
+        "home": "Regent Legend",
+        "away": "Camden United OG's",
+        "kickoff": "8:00 PM",
+        "venue": "Away",
+        "competition": "Division 3",
+        "played": false,
+        "ground": "Market Road Football Pitches"
+      },
+      {
+        "id": "ogs-2026-11-25-camden-united-og-s-spicegun-3rds",
+        "team": "ogs",
+        "dateISO": "2026-11-25",
+        "date": "Wednesday, 25 November 2026",
+        "home": "Camden United OG's",
+        "away": "Spicegun 3rds",
+        "kickoff": "6:00 PM",
+        "venue": "Home",
+        "competition": "Cup",
+        "played": false,
+        "ground": "Market Road Football Pitches"
+      },
+      {
+        "id": "ogs-2026-12-02-spicegun-fc-1st-camden-united-og-s",
+        "team": "ogs",
+        "dateISO": "2026-12-02",
+        "date": "Wednesday, 2 December 2026",
+        "home": "Spicegun FC 1st",
+        "away": "Camden United OG's",
+        "kickoff": "8:00 PM",
+        "venue": "Away",
+        "competition": "Cup",
+        "played": false,
+        "ground": "Market Road Football Pitches"
+      },
+      {
+        "id": "ogs-2026-12-15-camden-united-og-s-bloomsbury",
+        "team": "ogs",
+        "dateISO": "2026-12-15",
+        "date": "Tuesday, 15 December 2026",
+        "home": "Camden United OG's",
+        "away": "Bloomsbury",
+        "kickoff": "8:00 PM",
+        "venue": "Home",
+        "competition": "Cup",
+        "played": false,
+        "ground": "Market Road Football Pitches"
+      }
+    ]
   },
-  "errors": {
-    "first": "403 Client Error: Forbidden for url: https://mitoofootball.com/TeamHistAll.cfm?CI=68&TblName=Matches&LeagueCode=MDX2026&DivisionID=64",
-    "midweek": "403 Client Error: Forbidden for url: https://fulltime.thefa.com/fixtures.html?selectedSeason=224702165&selectedFixtureGroupKey=&selectedDateCode=all&selectedClub=652338347&selected; 403 Client Error: Forbidden for url: https://fulltime.thefa.com/displayTeam.html?id=380596793",
-    "ogs": "403 Client Error: Forbidden for url: https://fulltime.thefa.com/fixtures.html?selectedSeason=224702165&selectedFixtureGroupKey=&selectedDateCode=all&selectedClub=652338347&selected; 403 Client Error: Forbidden for url: https://fulltime.thefa.com/displayTeam.html?id=144179498"
-  }
+  "errors": {}
 }
