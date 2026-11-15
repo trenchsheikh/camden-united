@@ -8,6 +8,7 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
+      - run: pip install beautifulsoup4 requests
       - run: |
           python - <<'PY'
           import requests
