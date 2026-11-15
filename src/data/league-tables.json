@@ -1,0 +1,25 @@
+{
+  "updatedAt": null,
+  "lastSuccessfulSunday": null,
+  "teams": {
+    "first": {
+      "division": "Premier Division",
+      "source": "https://mitoofootball.com/LeagueTab.cfm?DivisionID=64&LeagueCode=MDX2026&TblName=Standings",
+      "rows": [],
+      "updatedAt": null
+    },
+    "midweek": {
+      "division": "Division 1",
+      "source": "https://fulltime.thefa.com/displayTeam.html?id=380596793",
+      "rows": [],
+      "updatedAt": null
+    },
+    "ogs": {
+      "division": "Division 3",
+      "source": "https://fulltime.thefa.com/displayTeam.html?id=144179498",
+      "rows": [],
+      "updatedAt": null
+    }
+  },
+  "errors": {}
+}
