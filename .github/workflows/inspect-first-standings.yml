@@ -7,29 +7,18 @@ permissions:
 jobs:
   inspect:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     steps:
-      - name: Check public 2026-27 standings sources
-        run: |
+      - run: |
           python - <<'PY'
-          import requests,re
-          from concurrent.futures import ThreadPoolExecutor
-          targets={
-            "nlm_www": "https://www.nonleaguematters.co.uk/divisions/62/",
-            "nlm_no_www": "https://nonleaguematters.co.uk/divisions/62/",
-            "nlm_form": "https://www.nonleaguematters.co.uk/divisions/62/F/",
-            "mitoo_www": "https://www.mitoofootball.com/LeagueTab.cfm?TblName=Matches&DivisionID=64&LeagueCode=MDX2026",
-            "mitoo_http": "http://mitoofootball.com/LeagueTab.cfm?TblName=Matches&DivisionID=64&LeagueCode=MDX2026",
-            "nlm_reader": "https://r.jina.ai/https://www.nonleaguematters.co.uk/divisions/62/",
-          }
-          def test(item):
-            name,url=item
-            try:
-              r=requests.get(url,timeout=18,headers={"User-Agent":"Mozilla/5.0"})
-              t=r.text
-              p=t.lower().find("league table")
-              return {"name":name,"status":r.status_code,"len":len(t),"url":r.url,"table_pos":p,"sample":re.sub(r"\\s+"," ",t[max(p-120,0):p+270]) if p>=0 else t[:160],"camden":'Camden United' in t,"date2026":'November 2026' in t or 'Nov 2026' in t}
-            except Exception as e:return {"name":name,"error":str(e)[:200]}
-          with ThreadPoolExecutor(max_workers=6) as pool:
-            for row in pool.map(test,targets.items()):print(row,flush=True)
+          import requests
+          from bs4 import BeautifulSoup
+          r=requests.get('https://www.nonleaguematters.co.uk/divisions/62/',timeout=25)
+          s=BeautifulSoup(r.text,'html.parser')
+          t=s.select_one('table.league')
+          print('found',bool(t),'rows',len(t.select('tr')) if t else 0)
+          for row in t.select('tr')[:12]:
+              cells=row.find_all(['th','td'],recursive=False)
+              print('row', len(cells),[(c.get('colspan'),c.get_text(' ',strip=True)) for c in cells][:24])
+          print('headline',s.title.get_text(' ',strip=True) if s.title else None)
+          print('2026-27?', '2026 - 2027' in s.get_text(' ',strip=True))
           PY
