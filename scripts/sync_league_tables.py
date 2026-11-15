@@ -47,9 +47,10 @@ def read_public_page(url):
     Direct FA requests are denied to GitHub runners; the same public text
     reader already used by the working weekly fixtures updater is supported.
     """
-    res = requests.get("https://r.jina.ai/" + url,
-                       headers={"User-Agent": UA, "Accept": "text/plain"},
-                       timeout=38)
+    # Match the simple public-reader request used by the verified fixtures job.
+    res = requests.get("https://r.jina.ai/" + url, timeout=38)
+    if res.status_code != 200:
+        raise ValueError(f"Public reader HTTP {res.status_code}: {res.text[:100]}")
     res.raise_for_status()
     body = res.text
     if len(body) < 900 or "Just a moment" in body[:200] or "security verification" in body[:500]:
