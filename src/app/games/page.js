@@ -3,7 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FixturesBoard from '@/components/FixturesBoard';
-import { fixtures as firstFixtures, MITOO_SOURCE_URL } from '@/data/fixtures';
+import { fixtures as firstFixtures } from '@/data/fixtures';
 import { ogFixtures } from '@/data/ogFixtures';
 import synced from '@/data/fixtures-synced.json';
 
@@ -26,7 +26,25 @@ export default function GamesPage() {
   const gamesByTeam = Object.fromEntries(
     Object.entries(seeds).map(([team, fallback]) => {
       const synchronized = synced.teams?.[team] || [];
-      const games = synchronized.length ? synchronized : fallback;
+      // The county FA publishes cup matches independently of the First Team's league.
+      // Merge with the verified league schedule so a cup-only feed never hides it.
+      const games = team === 'first'
+        ? (() => {
+            const byDate = new Map(fallback.map((match) => [match.dateISO, match]));
+            for (const match of synchronized) {
+              const original = byDate.get(match.dateISO);
+              byDate.set(match.dateISO, {
+                ...original,
+                ...match,
+                // County FA rows sometimes list the home club instead of a ground.
+                ground: match.ground && match.ground !== match.home && match.ground !== match.away
+                  ? match.ground : original?.ground,
+                competition: original?.competition || match.competition,
+              });
+            }
+            return [...byDate.values()];
+          })()
+        : (synchronized.length ? synchronized : fallback);
       return [team, games
         .filter((game) => !game.played && game.dateISO >= today)
         .sort((a, b) => a.dateISO.localeCompare(b.dateISO))
