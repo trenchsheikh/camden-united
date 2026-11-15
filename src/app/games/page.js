@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { fixtures, MITOO_SOURCE_URL } from '@/data/fixtures';
 
-// Keep date-based upcoming/pending sections current without a rebuild.
+// Keep the upcoming fixtures current without a rebuild.
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
@@ -12,11 +12,11 @@ export const metadata = {
   description: 'Camden United FC fixtures in the Premier Division and Middlesex County FA Premier Cup.',
 };
 
-function ResultBadge({ result, played }) {
-  if (!played) {
+function ResultBadge({ game }) {
+  if (!game.played) {
     return (
       <span className="inline-flex items-center justify-center min-w-12 px-2 py-1 text-xs font-oswald font-bold uppercase tracking-wider bg-gray-100 text-gray-600">
-        TBC
+        {game.kickoff || 'TBC'}
       </span>
     );
   }
@@ -54,13 +54,13 @@ function FixtureRow({ game }) {
   return (
     <li className="py-5 sm:py-6 grid grid-cols-1 sm:grid-cols-[auto_1fr_auto] gap-3 sm:gap-6 sm:items-center">
       <div className="flex items-center gap-3">
-        <ResultBadge result={game.result} played={game.played} />
+        <ResultBadge game={game} />
         <div>
           <p className="text-xs font-oswald uppercase tracking-widest text-primary">
             {game.venue}
           </p>
           <p className="text-sm text-gray-500">
-            {game.date}{game.kickoff && <span> · {game.kickoff}</span>}
+            {game.date}
           </p>
         </div>
       </div>
@@ -89,8 +89,6 @@ function FixtureRow({ game }) {
 export default function GamesPage() {
   const todayInLondon = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/London' });
   const upcoming = fixtures.filter((game) => !game.played && game.dateISO >= todayInLondon);
-  const awaitingResults = fixtures.filter((game) => !game.played && game.dateISO < todayInLondon);
-  const results = fixtures.filter((game) => game.played);
 
   return (
     <main className="min-h-screen bg-white">
@@ -135,34 +133,6 @@ export default function GamesPage() {
               </div>
             )}
 
-            {awaitingResults.length > 0 && (
-              <div>
-                <h2 className="text-2xl md:text-3xl font-oswald font-black uppercase text-gray-900 mb-2">
-                  Awaiting Results
-                </h2>
-                <p className="text-sm text-gray-500 mb-6">
-                  These matches have passed, but no final score has been confirmed yet.
-                </p>
-                <ul className="divide-y divide-gray-200 border-y border-gray-200">
-                  {awaitingResults.map((game) => (
-                    <FixtureRow key={game.id} game={game} />
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {results.length > 0 && (
-              <div>
-                <h2 className="text-2xl md:text-3xl font-oswald font-black uppercase text-gray-900 mb-6">
-                  Results
-                </h2>
-                <ul className="divide-y divide-gray-200 border-y border-gray-200">
-                  {results.map((game) => (
-                    <FixtureRow key={game.id} game={game} />
-                  ))}
-                </ul>
-              </div>
-            )}
           </div>
 
           <div className="mt-12 flex flex-col sm:flex-row sm:items-center gap-4 justify-between border-t border-gray-200 pt-8">
