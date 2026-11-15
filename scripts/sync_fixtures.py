@@ -57,14 +57,14 @@ NAME_RE = {
     "midweek": re.compile(r"^Camden United(?: FC Midweek)?$", re.I),
     "ogs": re.compile(r"^Camden United OG['’]s$", re.I),
 }
-USER_AGENT = "CamdenUnitedFixtureSync/1.0 (public club schedule; weekly check)"
+USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 NOW = datetime.now(LONDON)
 TODAY = NOW.date()
 SUNDAY_KEY = TODAY.isoformat()
 
 
 def fetch(url):
-    result = requests.get(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html"}, timeout=25)
+    result = requests.get(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "Accept-Language": "en-GB,en;q=0.9"}, timeout=25)
     result.raise_for_status()
     if len(result.content) < 900:
         raise ValueError("Response too short to contain verified fixtures")
