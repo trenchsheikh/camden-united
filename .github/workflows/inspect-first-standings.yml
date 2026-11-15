@@ -13,11 +13,13 @@ jobs:
           python - <<'PY'
           import requests
           from bs4 import BeautifulSoup
-          r=requests.get('https://www.nonleaguematters.co.uk/divisions/62/',timeout=25)
+          r=requests.get('https://www.nonleaguematters.co.uk/divisions/62/',timeout=25,headers={'User-Agent':'Mozilla/5.0'})
+          print('status',r.status_code,'bytes',len(r.content))
           s=BeautifulSoup(r.text,'html.parser')
-          t=s.select_one('table.league')
+          print('tables',[(x.get('class'),len(x.select('tr'))) for x in s.select('table')][:7])
+          t=next((x for x in s.select('table') if 'Camden United' in x.get_text(' ',strip=True) and len(x.select('tr')) > 7),None)
           print('found',bool(t),'rows',len(t.select('tr')) if t else 0)
-          for row in t.select('tr')[:12]:
+          for row in (t.select('tr')[:12] if t else []):
               cells=row.find_all(['th','td'],recursive=False)
               print('row', len(cells),[(c.get('colspan'),c.get_text(' ',strip=True)) for c in cells][:24])
           print('headline',s.title.get_text(' ',strip=True) if s.title else None)
