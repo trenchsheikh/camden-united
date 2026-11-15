@@ -1,0 +1,45 @@
+name: Inspect Public League Table Sources
+on:
+  push:
+    paths: ['.github/workflows/probe-tables.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check league table pages
+        run: |
+          python - <<'PY'
+          import requests
+          from concurrent.futures import ThreadPoolExecutor
+          urls={
+            'fa_tables': 'https://fulltime.thefa.com/tables.html?league=695549151&selectedSeason=224702165',
+            'fa_home': 'https://fulltime.thefa.com/index.html?league=695549151&selectedSeason=224702165',
+            'fa_midweek': 'https://fulltime.thefa.com/displayTeam.html?id=380596793',
+            'fa_ogs': 'https://fulltime.thefa.com/displayTeam.html?id=144179498',
+            'fa_div1': 'https://fulltime.thefa.com/index.html?league=695549151&selectedSeason=224702165&selectedDivision=436230581',
+            'fa_div3': 'https://fulltime.thefa.com/index.html?league=695549151&selectedSeason=224702165&selectedDivision=954226676',
+            'mitoo_table': 'https://mitoofootball.com/LeagueTab.cfm?DivisionID=64&LeagueCode=MDX2026&TblName=Standings',
+            'fa_middlesex': 'https://fulltime.thefa.com/index.html?league=4397699',
+          }
+          def check(item):
+              name,url=item
+              try:
+                  r=requests.get('https://r.jina.ai/'+url,timeout=35)
+                  body=r.text
+                  markers=['League Table','## League Table','Division 1','Division 3','selectedDivision','2026','Camden United','Just a moment']
+                  info={'name':name,'status':r.status_code,'length':len(body),'markers':[(x,body.find(x)) for x in markers if x in body]}
+                  at=body.find('## League Table')
+                  if at<0: at=body.find('League Table')
+                  info['sample']=repr(body[max(0,at-400):at+1800] if at>=0 else body[:450])
+                  return info
+              except Exception as e:
+                  return {'name':name,'error':str(e)[:180]}
+          with ThreadPoolExecutor(max_workers=8) as pool:
+              for item in pool.map(check,urls.items()):
+                  print(item,flush=True)
+          PY
